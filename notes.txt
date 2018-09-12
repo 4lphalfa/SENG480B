@@ -1,0 +1,445 @@
+==========
+2018-09-07
+==========
+
+Fontier Topics in Cyber-Physical Systems
+
+Dr. Fanxin Kon
+
+
+
+
+How to Read, Write, Present Papers
+Nitin H. Vaidya
+
+Summary
+    - Use common sense
+    - Learn from experience
+
+
+Reading a Paper
+
+Why read papers
+    - So you know what's hapening
+    - Aavoid reinventing the wheel
+        * Does happen commonly, to many wheels already
+    - Find interesting research topics
+
+Why not to read papers
+    - Cannot read everything
+    - Should not read everything
+    - Can suppress innovation
+        * once you see solutions using a particular there, often hard to think differently
+
+Read or not read, that is the question
+    - Read, of course
+    - Know what's important
+    - Know what can be ignored
+
+What to read
+    - Major conferences
+        * Journals are a few years behind, but still can be useful
+    - Tech reports from active research groups
+        * need to know which groups to look up
+    - Survey / overview papers
+        * ACM Computing Surveys
+        * CACM, IEEE Computer, Spectrum
+        * More technical - IEEE personal Communications, ...
+        * newsletters - ACM SIGCOMM, ACM, SIGMOBILE, ACM SIGBED...
+
+What's In a paper
+    - Abstract
+    - Introduction
+    - Motivation
+    - Problem description
+    - Solution
+    - ...
+    - Performance Analysis
+    - Conclusions
+    - Future Work
+
+How to read a paper
+Know why you want to read the paper
+    - To know what's going on (e.g. scanning proceedings)
+        * title, authors, abstract
+    - Papers in your broad research area
+        * introduction, motivation, solution description, summary, conclusions
+        * sometimes reading more details useful, but not always
+    - Papers you may want to improve on
+        * read entire paper carefully
+
+What to note
+    - Authors and research groups
+        * need to know where to look for a paper on particular topic
+    - Theme of the solution
+        * should be able to go back to the paper if you need more info
+    - Approach to performance evaluation
+    - Note any shortcomings (Not reinventing wheels)
+
+So this paper is in print
+    - Be skeptical
+    - If it sounds too good to be true, it often is
+
+
+How to Write
+
+How to write a paper
+    - Do unto others as you would have them do unto you
+
+How to write a paper
+When you have truly exceptional results ex. P == NP
+    - Probably doesn't matter how you write, people will read it anyway
+
+How to write a paper
+    - Most papers are not that exceptional
+    - Good writing makes significaln difference
+    - Better to say little clearly, than saying too much unclearly
+
+Readability a must
+    - If the paper is not readable, author has not given writing sufficient thought
+    - Two kinds of referees
+        * if I cannot understand the paper, it is the writer's fault
+        * if I cannot understand the paper, I cannot critisize it
+
+Do not irritate the reader
+    - Define notation before use
+    - No one is impressed anymore by Greek symbols
+    - If you use much notation, make it easy to find
+        * Summarize most notation in one place
+    - Aviod using too many acronyms
+    - You may know the acronyms well. Do not assume the reader does
+
+How to write a theory paper
+    - Unreadability is not the same as formalism
+    - Reader should be able to understand contributions without reading all details
+    - if some proofs are not too important, relegate them to an appendix
+
+How to write a systems paper
+    - Provide sufficient information to allow people to reproduce your results
+        * people may want to reproduce exciting results
+        * do not assume this won't happen to your paper
+        * besides, referees expect the information
+    - Do not provide wrong info
+    - Sometimes hard to probide all details in available space
+        * may be forced to omit some info
+        * judge what is most essential to the experiments
+        * cite a tech report for more info
+
+Discuss related work
+    - Explain how your work relates to state of the art
+    - Discuss relevant past work by other people too
+    - Remember, they may be reviewing your paper
+        * Avoid: the scheme presented by Vaidya performs terrible
+        * Prefer: The scheme by Vaidya does not perform as well in scenario X as it does in scenario Y
+    - Avoid offending people, unless you must
+
+Tell them your shortcomings
+    - If your ideas do not work well in some interesting scenarios, tell the reader
+    - People appreciate a balanced presentation
+
+How to write weak results
+    - If results are not that great, come up with better ones
+    - Do not hide weak results behind bad writing
+    - If you must publish: write well, but may have to go to second-best conference
+    - If results not good enough for a decent conference, rething your problem/solution
+
+Misc
+    - Read some well-written papers
+        * award-winning papers from conferences
+    - Avoid long sentences
+    - If you have nothing to say, say nothing
+        * don't feel obliged to fill up space with useless text
+        * if you must fill all available space, use more line spacing, greater margins, bigger font, bigger figures, anything but drivel
+    
+Technical Reports
+    - Useful to get early
+
+
+
+
+==========
+2018-09-11
+==========
+
+How to Present
+
+How to present a paper
+    - Do unto others as you would have them do unto you
+
+How to present a paper (at a conference)
+    Objectives, in decreasing order of importance
+    - Keep people awake and attentive
+        * everything has been tried: play fiddle, cartoons, jokes
+        * in most cases, extreme measures should not be needed
+        * humor can help
+    - Get the problem definition across
+        * people in audience may not be working on your problem
+    - Explain your general approach
+        * most productive use of your time
+    - Dirty details
+        * most people in the audience probably do not care
+        * a typical conference includes 30+ presentations
+
+Talk outline or not?
+    - Useful when several ideas discussed in a signle talk
+    - Short talks: skip the outline
+    - Long talks: include an outline
+    - Make the outline interesting
+
+Text
+    You want people to (quickly) read your slides
+    - Use big enough font
+    - Do not put too mcuh on one slide
+        * don't want to keep them busy reading, instead of listening
+    - Use good colour schemes
+    - Slide text need to be grammatically accurate
+    - Keep it short
+        * OK to omit some details
+        * Fill them in when you present the paper
+    Practice makes perfect
+        vs
+    Practice can improve your presentation
+
+PowerPoint but not excessively
+    - Everybody has used PowerPoint
+    - No one is impressed
+
+Picture is worth 1000 words
+    - Use illustrations to explain complex algorithms
+    - Omit minor details, focus on the improtant
+    - They can read the paper to know the exact algorithm
+
+How to present a paper
+    - Avoid blocking the screen
+    - Point to the screen, rather than the slide on the projector
+
+How many slides
+    - Depends on personal style
+    - Rule of thumb
+        * 1 slide for 1-2 min
+        * Know you place
+    - I tend to make more slide than I might need, and skip the not so important ones dynamically
+    - Anticipate techinical questions, and prepare explanatory slides
+
+How to present a paer
+    - Practice makes perfect (or tolerable)
+    - May need several trials to fit you talk to available time
+
+ESL
+    - Accent may not be easy to understand
+    - Talk slowly
+    - Easier said than done
+
+No substitute for experience
+    - Nothing like a terrible presentation to learn what not to do
+
+Summary
+    - Use common sens
+    - Learn from experience
+    - Enjoy
+        * papers can be fun
+
+
+
+Introduction to Cyber-Physical Systems
+
+Embedded systems
+    Computing systems designed for a specific purpose
+    Predecessor to Cyber-physical systems
+    They are everywhere
+
+Embedded systems and the Market
+    Quiz: What % of today's current CPU shipment if destined to PC?
+    Answer: less than 1%
+    In fact embedded processor shipments surpassed PCs back in 1988
+
+Trend 1: Embedded systems are getting more complex
+    - Modern cars hage over 100 processors
+    - Increasing number of sensors, actuators, smart control, GUI
+    - Intelligent data fusion
+
+Ex: General automotive system
+    - The number of ECUs has more than doubled in 10 years
+        Many cars have more than 100 ECUs
+
+Trend 2: Embedded systems are getting more connected
+    - Command and control network - real time integration of vehicles, people, command
+    - Geotagging
+    - Many other ex
+        * power grid
+        * medical systems
+        * transportation
+        * etc
+
+Ex: v2v and v2x
+    - v2v: vehicle to vehicle
+    - v2x vehicle to pedestrian, vehicle to road site unit, ...
+
+CPS - The next Evolution
+    - Integration fo computation with the physical process
+    - Built on top of the embedded computing systems
+    - Interaction with the physical environment is promoted to a "first class"
+    - Promotes interaction and integration of subsystems
+        * classic saftey-critical embedded systesm: black boxes
+        * CPS: white-boxes, open protocols
+    - Main goals:
+        * co-design the cyber and physical part of the system
+        * Engineer a "system of systems"
+
+CPS applications
+    - Several new application only possible thanks to the CPS revolution
+    - Integrated operating room: seemingly connect medical devices, plug-and-play functionality
+        - Currently: a cable mess
+    - Smart power grid: predict and resposen to varying conditions in supply and demand of power
+    - An often ignored requirement for sustainable energy...
+    - Other application are an evoluto of existing systems
+        * UAV
+        * Autonomous Vehicles
+
+System view of CPS
+    Computation
+        Cyber
+    Communcation
+        Systems
+    Control
+        Physical
+    Computation
+        :
+(triangle)
+
+Control View of CPS
+    Cyber Space            ^->      Controller              -> v
+                        Sensor                              Actuator
+    Physical Space         ^<-      Physical system         <- v
+
+CPS Requirements
+    1. Saftey
+        - all such systems interact with the environment
+        - system failure can have catastrophic consequences
+        - system correctness depends on both logical results and the time at whic results are produced (real-time)
+    2. Performance
+        - safety is #1 requirement, but we still need to achieve sufficient performance
+        - many systems are resource constrained (in either weight, power, cost, etc)
+    3. Interoperability (talking to each other)
+        - Individual subsystems connected by open protocols
+        - security can be an issue
+
+Reliable CPS: not so much
+    - In 2007, 12 F-22s were going from Hawaii to Japan
+    - After crossing the IDL, all 12 experienced multible crashes
+        - No nav
+        - No fuel subsystems
+        - Limited comms
+        - Rebooting didn't help
+    - F-22 has 1.7(?) mil line of code
+    - Mercedes Class A failed the moose test in 97
+    - Sensor on roof detect overturn and auto open door
+    - What happens if a thief jumps on the car roof?
+
+CPS Challenges - Safety
+    - Safety is har to guarantee in interconnected and interdependent systems
+    1. Do not trues communication channels
+    2. Do not trust users
+    3. Do not trust lower-critically subsystems
+        * protect life-critical subsystems, make sure lower do not affect higher
+
+CPS Challenges - Timing Predictability
+    - The biggels architectural and system challenge
+    - The lowest abstraction layer (transistors) is pretty deterministic - we know how to compute exast timings
+    - However, higher levels loos all comcept of timing
+        * Deep pipelining, caches, out-of-order and speculative execution...
+        * Thread models, locking, interrupts...
+    - This is fine for general purpose computing, but not for CPS - the physical system uses real time!
+    - We need to ensure that computation always finishes within guarantee time windows -> we are interested in worst-case performance, not average performance!
+    - Timing predictability
+        * The time that the system requries to perform an poeration should exibit little variation
+        * Such time should be easy to compute
+        * It should not be affected by other parallel operations in the system.
+
+CPS Challenge - Security
+    - Interconnected systems are also open to attacks
+    - Security can become a significant concern
+        * Integrity & availability are often more important than confidentiality, but not always
+
+
+Research Topics
+
+Security In CPS
+
+CPS security incidents
+    Siberian pipeline: June 1982:
+        - Soviets stole control software from Canadian company
+        - UE influence Canadian company to alter code such that pipeline pressures would build up
+        - Explosion could be sen from space
+    Stuxnet: 2009
+        - Attack on Iranian nuclear facility
+        - Used 4 undiscovered exploits targeting control
+    US drome captured: 2011
+        - Iran caputred predator drone that landed in the wrong area
+        - GPS spoofing
+        - "System" worked perfectly
+            * sensor measurements where wrong
+    IoT DDoS: Oct 21, 2016
+        - Thousands of devices overtaken using default passowrds
+        - Organized into botnet to flood DNS provider
+        - Took down many major websites
+
+Typical CPS Architecture
+    - Cyber attack surfaces
+        * eg communication, netowrks, computors...
+    - Environmental attack surfaces
+        * eg GPS signal, electro-magnetic interference...
+    - Physical attack surfaces
+        * eg locks, casings, cables...
+    - Human attack surfaces
+        * eg phishing, blackmail ...
+
+What is CPS security?
+    - A CPS attack whose goal is to (negatively) affect the interaction between a CPS and the physical workd
+        -- originates through any attack surface
+    - CPS security concerns the development of technologies for defending against CPS attacks
+        -- Discovering new vulnerailities
+        -- Detecting CPS attacks
+        -- Mitigating attack effects
+        -- ...
+
+Ex: Sensor Attacks
+    Target: Sensor Attacks
+    - The attacker can arbitrarily change sensor measurements
+        * environmental attack surfaces
+        * cyber attack surfaces
+    Goal: Resilience
+    - To ensure ....
+
+Ideally...
+    - Ideally the system performs (almost) the same as if there is not attack
+
+How sensor attacks affect control?
+    1. A sensor attack or fault occurs
+    2. The input, ie estimation X, incorrectly reflects the system's physical state
+    3. The output ie control input u is misled
+    4. The actuator performs the misled actuation
+    5. The physical system drifts off
+
+Some Existing Approaches
+    _ Approaches rely on sensor redundancy
+        * multiple sensors (partially) measure the same physical variables
+        * They limit the number of compromised sensors, eg less than half of the total number of sensors
+    - CPS checkpointing and recovery
+        * Ocasionally store estimates...
+
+Review on CPS security?
+    - CPS security concerns the development of technologies for defending against CPS attacks
+        -- Discovering new vulnerailities
+        -- Detecting CPS attacks
+        -- Mitigating attack effects
+        -- ...
+    - The above example studies how to mitigate effects of sensor attacks
+    - ...
+
+Real-Time scheduling in CPS
+
+
+
+
+
