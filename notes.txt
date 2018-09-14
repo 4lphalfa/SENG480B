@@ -443,3 +443,226 @@ Real-Time scheduling in CPS
 
 
 
+==========
+2018-09-14
+==========
+
+Real-Time Scheduling in CPS
+
+Why real-time scheduling?
+    - Computational tasks running in cyber components, eg processors such as electronic control units in a vehicle
+    - We need to ensure that these computational tasks always finish within guarantee time windows
+    - We are intersted in worst-case performance, not averate performance
+    - ex: braking a car within 20ms, otherwise may cause accidents
+    - It is challenging to make all tasks meet all deadlines!
+
+Real-Time systems
+    - The correctness of they system depends not only on the lovical result of the computation but also on the time at which the results are produced
+    - A correct balue at the wrong time is a fault
+    - Processes attempt to control or react to events that take place in the outside world
+    - These events occur in 'real time' and tasks must be able to keep up with theim
+    - Processed are associated with time constraints (deadlines)
+
+Soft vs Hard real-time
+    - Soft real-time: missing deadlines is undesireable, but will not lead to catastrphic consequences
+        * Related to the concept of "Quality of service"
+        * Typically interested in average-case response time (turnaround time)
+        * ex media palyer, reservation systems, phones
+    - Hard real-time: missing deadlines is not an option
+        * Interested in worst-case response time
+        * ex airplanes, nuclear plants, military systems 
+        * However more on control performance later
+
+Real-Time Spectrum
+    No RT       <--     Soft RT     -->         Hard RT
+    Computer simulation     User Interface      Internet video      Telecommunication       Military systems
+
+Task Model
+    - task: a real-time computation unit
+        * Think of it as an execution thread with additional timing parameters (in particular: service time is known) 
+        * The job of the real-time scheduler is to schedule tasks
+    - Three main task models
+        - Aperodic 
+        - Perodic
+
+Aperiodic Tasks
+    - Event triggered computation
+    - Task is activated by an external event
+    - Task runs once to respond to the event
+    - Relative deadline D: available time to respond to the  Event
+    - ex event=press accelerator pedal
+
+Perodic Task
+    - Time triggered computation
+    - task is activated periodically every T time units
+    - Each periodic instance of the task is called a job
+    - Each job has the same relative deadline (usually = to period)
+    - ex most digital controllers
+    - Sporadic Task:....
+
+Utilization and Schedulability Analysis
+    - task Utilization for a periodic/sporadic task: percentage of processor time required by the task
+    - System Utilization: Percentage of processor time required by all tasks
+    - Base uniprocessos scheduling result: task set is clearly not schedulable if: U > 1
+    - For many scheduling algorithms, we can define a utilization bound U_b such that the taks set is schedulable if: U <= U_b
+
+Other Details on the Analysis
+    - For a scheduling algorithm to be useful, it must ve associated with a schedulability anaysis
+    - Sufficient analysis: if analysis says YES, then task set is scheduable by the given algorithm. If the analysis says NO, we do not know
+    - Necessary analysis: if analysis says NO, then we know that ther exists a valid scenario in which the task set misses a deadline
+    - Offline analysis: task set is decided before the system starts. Run scheduability analysis on-line and admit new task only if all tasks can still meet deadlines
+
+Ex: Uniprocessos Periodic Scheduling
+    3 Main scheduling categories
+        1. Table-based scheduling
+            - Build a table that dictates when each task executes
+            - Problem: Only works for periodic tasks
+            - Problem: only works for off-line analysis
+            - Sometimes the best choice for more complex task models
+        2. fixed-priority scheduling
+            - Each task is assigned a fixed priority
+        3. Dynamic-priority scheduling
+            - Task Priority varies at run-time (ex each job of the task has a different priority
+    Scheduler is typically preeemptive - better system utilization
+
+Rate-Monotonic Scheduling
+    - Fixed-priority scheduling algorithm
+    - Assumes periodic or sporadic tasks with D_i = T_i on a uniprocessos
+    - Assigms priorities to tasks on the basis of their periods: shorter period = higher priority
+    - Liu and Layland scheduability analysis: taks set is scheduable if: ...
+    ...
+
+RM ex
+    - Worst case respose time is produced when a
+U_b(2) ~= 0.828
+U <= U_b(N) = N(2^(1/N)-1)
+    where N is # of tasks
+
+Earliest-Deadline First 
+    - Dynamic-priority scheduling algorithm
+    - Task Priority is inversely proportional to its current absolute deadline
+    - Assumes periodic or sporiadic tasts with D_i = T_i on a uniprocessor, then...
+    - Schedulability analysis: the task set is schedulable if: U <= U_b = 1
+    ...
+(Larger deadline)
+
+EDF ex
+
+
+Scheduling on Multiprocessor
+    - Two solutions for scheduling real-time tasks on multiprocessors
+    - Solution 1: Partitoning
+        - Statistically assign tasks among M processors
+        - EX: EDF each core is schedulable if sum of utilizations of tasks assigmed to that core <= 1
+        - Problem can be rephrased as: given a set of objects with known sizes (task utilizations), place them into M equal size containers
+        - Classic bin-packing problem -- NP-hard
+    - Solution 2: Global Scheduling
+        - Keep a global scheduling queue
+        - Whenever there is a free core, pick one task from the queue and schedule it on the core
+    - In practice, real-time adoption of multiprocessos is limited, especially for hard systems
+    - Partitioned scheduling is preferred -- three issues with global scheduling
+        - Increases unpredictability -- tasks can migrate among cores
+        - Much more complex to implement
+        - Does not necessarily perform better than partitioned
+
+
+
+Sensor Fusion in CPS
+
+Motivation
+    - Each sensor has its strengths and weaknesses
+    - One sensor is never sufficiend for...
+    ...
+
+Sensor Fusion - Brief Definition
+    - The essence of ....
+
+Ex: Autonomous Cars
+    Civil Maps Block Diagram
+
+IMUs work im part by detecting changes in pitch, roll, and yaw
+
+
+
+Energy / Power CPS
+
+Ex: Smart Grid
+
+Intro
+    - Simply means a 'smarter' power grid
+    - A smarter grid with improved efficiency and two way communication
+    - Reducing carbon emmissions as it is integrated with renewable energy resources
+    - A Network created through IT, communication technology and Electrical Power system
+    - Can handle digital, computerized equipment and technology dependent on it and can automate and manage ....
+
+Comparison
+    Smart grid remote control operation vs traditionally manual
+    Smart grid add distributed generation of power
+    Emart grid power flow control should be extensive
+
+Features of Smart Grid:
+    Smart Home
+        - new equipment, appliances, and softwawre are available that use emerging Smart Grid technologies to save energy, 
+            seek out the lowest rates, and contribute to the smooth and efficient functioning of our electric grid
+    Integration of Renewable energy
+        - It will give grid operators new tools to reduce power demand quickly when wind or solar power dips
+        - It will have more energy storage capabilities to absorb excess wind ans solar power when it isn't needed then ...
+        ...
+    Consumer Engagement
+        - offers many pooprtunities for cosumers to save energy...
+        ...
+    Grid Operation Centres
+        - Primary task of grid is to make sure that a much power is generated as is being used
+        - Otherise grid can become unstable 
+        - Grid operators also have limited info about how the power is flowing through the grid
+        - Smar grid techmologies offer a new solution to the problem of monitoring and controlling the grid's transmission system
+        - Reducing the need to fire up costly secondary plants
+        - Grid oerators can see and manage electricity consumption in real time
+        - Software could ...
+        ...
+    Distribution Intelligence
+        - It refers to the part of the Smart Grid that applies to the utility distribution System, that is the wires, switches. and transformers that connect the utility substation to you
+        ...
+    Plug-in Electric Vehicles
+        - For the smart grid, plug-in electric behicles represent a broader technology know as energy storage
+        - PVEs can drastically reduce our dependance on oil, and they emit now air pollutantis when running in all-electric models. Howe...
+
+Smart Grid Components
+    Smart Meters
+        - Recognizes and details electrical consumption
+        - Relays info to central monitoring station
+        - Will replace traditional meters
+        - Power outage notification and power quality monitoring
+        ...
+    Phasor Measurement
+        - Measure AC current waveforms
+        - Monitors power quality
+        - Wide area measurement system
+            - Provides real-time data
+            ...
+        ...
+    Information Transfer
+        - Two way communication
+        - ...
+    Distributed Generation
+        - Allow the connection of small scale renewable genreation
+            - Solar, wind, fuel cells, microturbines
+        - Generation close to the load, improving efficiency
+        - Customer interaction
+        - Increased reliability
+
+Smart Grid Benefits
+    - Efficiency
+    - Reliability
+    - Environment
+
+Drawbacks
+    - Security and privacy
+    - Some types of meters can be hacked, these hackers:
+        - Gain control of thousand, even millions of meters
+        ...
+    ...
+
+
+
+
