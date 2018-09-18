@@ -666,3 +666,187 @@ Drawbacks
 
 
 
+==========
+2018-09-18
+==========
+
+Unsupervised Machine Learning Based Anomaly Detection in CPS
+
+Anomaly Detection in CPS
+    Anomally: a deviation from nominal behavior of a dynamic system
+        - Nominal/off-nominal (anomalous) conditions
+    Anomally in CPS:
+        - eg physical faluts, cyber attacks
+        - types: local, system wide
+        - Problem: strong subsystems connectivity 
+            -> vulnerable to catastrophic faults propagation
+            -> efficiency? robustness? resilience?
+
+Anomaly Detection Methods
+    - Rule-based methods
+        * rely on domain knowledge
+        * need calibation & validation
+        * example: temp & humi sensors at dew point
+    - Data-driven methods (supervised)
+        - lack of training data <- anomalies as low prob. events
+        - information disparity in CPS:
+            continuous(physical world) vs event-driven(cyber world)
+
+Key Ideas
+    Unsupervised Learning:
+        - Using nominal data for training
+    Symbolization:
+        - representing different types of data uniformly
+    RBM free energy distribution as determiner:
+        - RBM: Restrict Boltzmann Machine
+        - High Free energy -> lo probability -> anomaly
+    Spato-temporal graphical modeling
+        - Spatio-temporal pater network (STPN)
+            (for capturing patterns of system-wide dynamic behaviors)
+
+Model Explained
+    Divided by two parts
+        Training
+            Accepts data of normal state
+            2d matrix
+            first? step symbolization
+            third part, try to learn the pattern of how the system works normally
+            Then break it down into samples
+            compare the normal pattern with the subsequence(small bit)
+            Then use this data as training results
+        Testing
+            Everytime we get a time series of the system
+            Break down time series in to many subsequences
+            Check the new subsequences to see how they fit
+
+Symbolization /partitoning
+    For a system of f - subsystems:
+        input: system wide time series (under nominal condition if for training
+        output: D-order Markov chain
+        Methods: uniform partitioning (UP)
+
+STPN model (W_D)
+    Spatio-temporal pattern network (STPN)
+        A set of 4-touple: For each pair of subsystems a,b <= F)
+            Q^a: states set of a
+            Epsilon^b: alphabet set of B
+
+        Each node represents a subsystem
+        Each edge represents a relationship
+        
+STPN Ex
+    Has 2 subsystems
+    Each symbol represents a state
+
+Subsequences -> RBM Input
+    Subsequence S~
+        Subset of S in a given time window
+    Process
+        Compute each Lambda^(AB)(S~), for all a,b <+ F, through a model-inference process (omit)
+        Normalize all results and convert to 1s and 0s, resulting in a binary vector of size f^2
+        Taking this vector as a trining/test instance
+
+Training RBM
+    Restricted Boltzmann Machine (RBM)
+    Training process: optimal weights, biases -> minimized free energy (maximized likelyhood of nominal conditions)
+
+Finding an ANomaly (Testng phaze)
+    Test data preparation
+    Output as free energy distribution
+    Kullback-Libler Distance (KL) is used for distinguished anomalies from nominal modes
+        Distance(P,Q) = KL(P||Q)+KL(Q||P)...
+        ...
+
+Evaluation
+    Left: lower free energy
+    Right: higher free energy
+
+Discussion
+    Characteristics and performance
+        Unsupervised training with nominal data
+        spatio-temporal pattern for dynamic system behaviors
+        supporting multiple nominal modes
+        capturing both local and global anomalies
+        supporting multiple types of data (Vital to CPS)
+        robust to persistent anomalies (transient ones not tested)
+    Further Research directons
+        More complex learning technique eg stacked RBM
+        root-caused analysis of anomalies
+        detecting multiple simulataneous anomalies
+
+
+
+
+
+Attack-Resilient Sensor Fusion for Safety-Critical CPS
+
+Overview
+    How a attacker can compromize a subset of these sensors
+    algorithm that Combines data recieved 
+    ...
+
+Intro
+    Ensuring saftey is important
+    data comes from the shared bus to fusion algorithm and sent to the controller
+    any of the nodes that interact with the environment can be compremized to send faulty data
+    not just about sequental data, but also what time it's sent
+    provide time slots to each of these modules
+    Abstract
+    Probabilistic
+    Must ensure that the working sensors don't affect the faulty sensor
+    Abstract model where each sensor provides interval of possible values
+    Do not merge data with faulty data
+    sensor provides controller with a single segment combine the values and take an average
+    Precision gets hampered if the timeslot for fusion interval is too big
+    
+Precise formulations of the problems addressed in this work
+    Increase systems durability to attacks
+
+System Model
+    Sensor is correct if its interval contains the true value
+
+Fusion Algorithm
+    input of the fusion intervals...
+    If any fusion interval contains a faulty signal, a flag is thrown
+
+Attack Model
+    Attack Goals
+        Land Shark
+            unmanned drone vehicle
+            possible to spoof some of the measurements without physical access to the vehicle
+        RQ-170
+            Captured in Iran
+            captured through a jammed GPS signal, showing that sensor attacka are a valid threat for autonomous CPS
+    Attack Means
+        Phsycal Attaks
+            Not always possible as sensors can be attached to other platforms and cannot be compramized without affecting critical components
+        Cyber Attaks
+            Not always possible b/c finding bugs in code or replacing the software require lots of effort
+    Assumptions
+        Number of compromised sensors is < n/2, and the number of sensors is greater than the # of compromised sensors
+        Worse case scenairo, unlimited computation power
+        Can't change the sensor interval, but can affect the fusion interval
+        
+Problems
+    How does the order affect the performance of the attacker
+    Make use of the past values and map it to the present values to protect against attack
+
+Model of the attacker and present worst case results with respect to size of fusion intervals
+
+Attack Strategies
+    Constraint Stay undetected
+        Passive mode: not yet transmitting data, limited impact
+        Actice, no constraints on placement of intervals, great impact
+    
+    Begins in passive mode
+    computes the intersection of all the seen measurements including his own compromised sensor, cannot say if he can affect other sensors
+    When in passive, must include...
+    Switch to active mode
+    n is total number of sensors
+    f is number of sensors that are under his attack
+    number of transmitted info ...
+    not constrained as long as the fusion interval overlaps
+
+
+
+
