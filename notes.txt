@@ -846,6 +846,287 @@ Attack Strategies
     f is number of sensors that are under his attack
     number of transmitted info ...
     not constrained as long as the fusion interval overlaps
+    Maximizing the size of the fusion interval to make more room for the faulty measurements
+
+Worst case analysis (for the system, best case for the attacker)
+    Attacking the biggest intervals does not change the worst case in the system
+    Attacking the smallest interval can achieve the absolute worst
+
+
+Comparison of effects of different communicaton schedules
+
+Schedule comparison oand analysis
+    whether its better to send through an ascending or decending schedule
+    
+Calculation method
+    Taken a sensor system (3-5) the sensor length from 5-20 with increments of 3, and the number of attack sensors from 1-(n/2)
+    From the table the expected frsion interval under the ascending schedule was never larger than that under descending.
+    You can pick either schedule, doesn't matter for the attacker
+
+
+Introducing system dynamics and benefits of the sue of measurement history
+
+While using history
+    Ignore measurements when we expect the sensor to be compromised
+    3 ways to use past measurements
+        map n
+            all intervals from time t are mapped to time t+1 resulting in 2n intervals at time t+1 with 2f as the new bound on the number of corrupted
+        map R and intersect
+        pairwise intersect
+            found to be most effecient
+
+
+Combining effect of 2 methonds
+    Taking the history as well as ascending schedule
+
+Unified approach for attack-resilient sensor fusion
+    ascending slightly better than descending (for landshark)
+
+
+Performance of proposed sensor fusing approach using simulation...
+
+Case Studies
+    Landshark has 4 sensors to estimate speed, 2 wheel encoders, a GPS and a camera
+
+
+When we apply it to real life, there is no way to make it less complex, when it's more complex its easier to attack
+Sensors do get attacked, try to apply techniques so when it does get attacked, its not as impactful
+
+
+
+
+
+==========
+2018-09-21
+==========
+
+Guaranteed Physical Security with Restart-Based Design for Cyber Physical Systems
+
+CPS and Security
+    Increasingly connected to the internet
+    Becoming more complex when leads to more vulnerabilities
+    Common components are worth attacking because they are common and have low security
+
+Cyber security vs Phsyical security
+    Traditionally
+        Very distinct
+        cyber: stealing info
+        Physical: destabilizing a helicopter
+    Now
+        Attacks on software can give you physical contro
+
+Restart Based Security
+    if you can turn it off and back on, you can reset it
+    You want a time window to get the system's inertia, use the reseting and inertia to reset and move system back to working order
+
+Spectrum of Physical Dynamic Speed
+
+Safety Controller Fallback
+    Operate
+    System has sensor
+    System has inertia
+    Load in uncoruptable fix
+    figure out when to reset the system to keep the system in operating range
+
+Related work: Simplex Architectures and Variants
+    Assumes that misbehaviour can only occur in a subset of software
+
+Restarting as a Security
+    Revival: Reactively restarting
+    Rejuvination
+
+System Model
+    focus on embedded systems
+    Adversaries can:
+        Insert, listen, or modify messages between components
+        Manipulate sensor inputs
+
+Assumptions
+    Software image integrity
+        Its ok that this image has bugs
+    Read only memory
+        Unmodifiable
+    Integrity of Root trust
+    Sensor and actuator integrity
+        They don't have physical access
+        doesn't deal with if a 3rd party component is compromised
+    External Hacks
+        can use external interface to launch attacks
+    Integrity Violations
+
+Imporved defense from other attacks
+    Side channel info leakage
+    System level DoS
+    Control Degradation
+
+No improved defense on
+    Man in the middle
+    DoS network access denial attacks
+    No safety guarentees if system can be jammed
+
+
+Background
+
+State Definations
+    Admissible and inadmissible
+        Good states, bad states
+    Recoverable states
+        Subset of admissible
+
+Safety controller
+    Use linear dynamics
+
+Safety Constraints
+    describe the boundaries of space
+
+Computing Reachable States
+    Determing reachable states in real time is har
+    Use an alg that has a cap-able runtime to guarantee
+
+Secure Execution intervals
+    Time period when you know the attacker hasn't messed up your software yet
+    Critical to calculate
+        When to schedule restart time
+        ...
+    Asume that the state of the next SEI is something that the controller can bring back into admissble states
+    Accomplished through
+        Full system restarts
+        Software reloads
+    This ensures uncorrupted software is running
+
+Safe Restart Times
+    Assuming that the plane is flying, bad state is hitting ground
+    Important to fugure out the reachable admissible state
+        Don't want to restart and be int the ground
+
+True Recoverable States
+    States that the SC can push the system into the recoverable region
+    Need to know how long it takes to stabilize the system
+
+Checking Conditions
+    Possible to check these conditions using real-time ...
+
+Restart time algorithm
+    extend the restart time until it reaches bad states, and reset it one step so you can self correct safely
+
+System Operation Cycle Algorithm
+    
+
+Evaluation of methods
+    3DOF helicopter
+    Warehouse temp control
+
+Controller Setup
+
+Calculated Safe Restart Times for 3DOF Helicopter
+    Space of states, red is bad, green is undamaged but not in a safe state, white through black is operational range and want to be in black
+
+Impact on availability and control
+    Is is available and controlable is important
+
+Attacks and Behaviour
+    Heli
+        heli never crashed with the 3 attacks
+    Warehouse
+
+
+Discussion
+
+Sutable applications and software difersification
+    Areas
+        Restart times are substantually less than physical dynamics times
+        applications where potential damage is far more critical than reduced performance
+    Software diversification
+        Doesn't remove the ability to attack the system
+        Change software on reboot to prevent attack?
+
+
+
+
+Vulnerability of Transportation Networks to Traffic-Signal Tampering
+
+Keywords 
+    Transportation network: air transportation networks
+    Attack resilience
+    CPS: integrating software and physical
+    Tampering attakc: uses wireless interfaces to tamper with traffic signals
+    Traffic model: math model for road traffic
+
+Introduction
+    used to be standalone hardware devices
+    evolved into a complex network system
+    ensuring no attacks is impossible
+    Need to consider the impact of sucessful attacks
+    Assess vulnerability to network
+
+Call Transmission model
+    Uses Daganzo's cell transission model
+    Road networks are divided into cells and time is divided into uniform intervals
+    Each cell has 3 parameters
+        Max vehicles in cell
+        Max inflow/outflow of vehicles
+        constant that quantifies how speed of traffic decreasess as cell become more...
+
+Cell states
+    change from time segment
+    Ordinar cells
+        one sucessor one predecessor
+    Divergent cells
+        Multiple sucessor, one predecessor
+    Merging Cells
+        One sucessor, multiple predecessor
+    Source
+        infinite capacity finite output
+    Sink
+        infinite capacity finite input
+
+Attacker model
+    can compromise some of the traffec signals and tamper with schedule or configuration
+    Only accounts for short term scenarions
+
+Attacker action space and goal
+    Attacker only has a budgeted amout of cells that tye can target
+    They would reconfiger the traffic signals at the selected cells
+    Attacks must abide by hardware constraints
+    Goal is to maximize the travel time
+
+Network Vulnerability
+    define the vulnerability of a transportation network to traffic signal tampering attacks
+    A represents worse case scenarion
+    T represents travel time
+    Big part of determining vulnerability is the critical traffic signals which are more important than other signals
+    Identifying these singlas is important because they have biggest impact on conjestion
+
+Computational complexity
+    Describes the attackers decision problem
+    The attackers decision problem will have a solution only if the set cover problem has a solution
+
+Heuristic Algorithm
+    Attackers problem is NP-hard
+    Finding subset, use a greedy heuristic algorithm
+    Budget is now going to be less than the number of signalized intersections
+    This allows us to compute T(A) for any attack A using a linear program
+    runing time for this algorithm is upper bounded by the size of the transportation network
+
+Numerical Results
+    Compared to the heuristic algorithm with an exhaustive search algorithm
+    exhaustive algorith is guarenteed to find a result
+    Pretty similar with the budget is 1 or 2, heuristic is better for budget >2
+
+Simulation results
+    SUMO is a microsimulator that is widely used
+    4 scenarios
+        Morning: outiside to inside
+        Midday: between inside
+        Afternoon: inside to outside
+        Nighttime: between outisde?
+
+Simulation - Varying Budget
+    Separated by ~1%
+
+Simulation - Varying travel times
+    shows that the vulnerability can very between times
+
 
 
 
