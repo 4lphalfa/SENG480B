@@ -1114,18 +1114,233 @@ Numerical Results
     Pretty similar with the budget is 1 or 2, heuristic is better for budget >2
 
 Simulation results
-    SUMO is a microsimulator that is widely used
+    SUMO is a microsimulator that is widely used (Simulation of urban Mobility)
     4 scenarios
         Morning: outiside to inside
         Midday: between inside
         Afternoon: inside to outside
-        Nighttime: between outisde?
+        Nighttime: random late night travel 
 
 Simulation - Varying Budget
     Separated by ~1%
+    run time 8h
 
 Simulation - Varying travel times
     shows that the vulnerability can very between times
+    
+Related Work
+    Vuln of traffic networks due to natural disasters
+    Vulnerability of freeway control systems to attacks on the sensing and control infrastructure
+    Identifying critical links and evaluating network performance
+    Two player game to increase and combat traffic time
+
+Future Work
+    Understand what makes traffic signals an attractive target for attack
+    Reconfigure traffic signals in a more resilient way
+        therefore traffic congestion is minimal if an attack happens
+
+Budget represents how many signals they can compromise at once
+
+
+
+
+==========
+2018-09-25
+==========
+
+Amy 
+ZUbers against ZLyfts Apocalypse: An anal
+
+Defn
+    MaaS: Mobility-as-a-Service Describes a shift away from personally owned modes of transportation and towards mobility solutions that are consumed as a service (ex Uber, Lyft)
+
+In 2016, Uber was hacked and personal info was stolen
+Chief Security Officer was trying to conceal it
+
+Cyber Security
+    protection if internet-connected systems
+    Can help prevent cyber attacks, data breaches, and identity theft
+
+Main Ideas
+    Framework for the study of cyber security in Maas systems
+    A block coordinate descent algorithm to optimize attacks
+    Applied to NYC taxi
+
+The Approach
+    created Queing-therotical framwork modeling the redispach process
+    Analyze DoS cyber attacks by controlling cars maliciously through fake reservations (zombies) using an algorithm to derive optimal 
+
+Queing-therotical framwork
+    Custormer traveling model
+    rebalancing model/ balancing mechanism
+    Zombie model/ cyber security analysis
+    
+    i,j source,destination
+
+Customer Travelling Model
+    Customers arrice at each section i folling a time-invariant Poisson process with rate
+    when they arrive, they can go to a destination where i is not the dest 
+    assume no queue for customers, but there is a queue for taxi
+    Travel times for passengers are independent and identically distributed
+
+ReBalancer model
+    Re-balancing vehicle: vehicle traveling from one dest without a customer, to fulfill the demand at its dest
+    each section i generates balancers according to a Poisson process with rate
+    i != j
+
+Zombie Model
+    Attacker can generate malicious zombies at each section i followin a Poisson process with rate
+    j != i
+    rebalancing policy does not detect the attacks
+    definable radius r of an attack, furthest distence that a zombie can be routed
+    attacker books a ride, then cancel it
+
+The Network
+    Total arival rate is the sum of the previous rates
+    Single Server Node: solid sided nodes, not simultaneous
+    Infinite Server node: dotted sidid nodes
+
+Jackson Network Model
+
+Optimal Attack Problems
+    By minimizing the customers getting a vehicle
+        in urban locations, it is impossible to do this, so try to limit vehicles in other areas 
+    By minizing customer time usage
+        More harmful because 
+    Attack Routing problem
+        attacker can only inject attacks with fixed rate
+    Attacker Rate Problem
+        with fixed routing i to j
+        the attack rates are chosen to achieve objective
+    Minimum attack problem
+
+Application to NYC Taxi System
+    Dataset of 1.1billion trips
+    Data includes pickup and dropoff locations, trip time, and fare
+    Divided midtown and downtown Manhattan into 531 square sections, each section servint a region 1-2 blocks wide
+    Jackson Network
+    75 million trips weekday 5-7 pm
+    ....
+
+    Minimal cost
+    the concentration is greater because the radius is more accurate
+    Price of attack is the cost penality when canceling a ride
+
+The Outcome
+    The graphs shows that $15 is the optimal charge for cancelations to protect from such attacks
+
+Possible improvements for the study
+    Not taking into account the high traffic bits of the city
+    Balancing mech does not take into cosideration if the system is being attacked
+    Could there be a possible defense mechinisim
+
+
+
+Cole Boothman
+An analsis Framework for DoS Attack on MaaS systems
+
+Importance of Cyber security
+    Since we store a lot of sensitive info, attacks can be really bad for us
+
+Attacker Motives
+    Data is very valuable (CC info)
+    sell for financial gain
+    Corporate espionage
+
+DoS attacks
+    target an network's or service's resource
+    For MaaS systems, it means making cars unavailable for the customers
+
+MaaS
+    Provide travel and transportation services to customers
+
+What this paper covers
+    Studies the vulnerability of MaaS systems to cyber security attacks
+    Queuing Therotical Framework for modeling MaaS dispatch process
+
+Are MaaS systems vulenrable to cyber security attacks
+    Lots of people use them
+    Optimal number of cars in an area
+    Not a lot of research done in the security of these systems
+
+Summar of Queuing Therotical Model
+    Cover customers who queue up at different locations for rides
+    3 entities: Customers Balancers and Zombies
+    Model simulates traveling from section to section
+
+MaaS in an urban area
+    Are is divided into N small sections
+    M vehicles provide service between pairs of sections i and j
+    Vehicles queue up and wait for passengers
+
+Customers
+    arive at section i with a random arrival rate
+    they choose to travel from i to a different section j
+    if no vehicle is available, customers leave
+    Sum of i,j that exists in the set of all sections SxS | Routing(i,j) = 1 (or 100%)
+    Travel times are independent, travel time is random within a certain range and customers don't affect each others travel time
+
+Balancers
+    System needs to accout for unususally high demand
+    Balancers accout for this demand
+    Arrive at section with a random arrival rate
+
+Zombies (fake customers)
+    Call a ride and then cancel it
+    Arrive at a section i with a random rate
+    choose to travel from i to j
+    balancers do not detect zombies
+    can only attac (be routed to) sections within an attack radius r
+
+Notes about Entities
+    Passenger loss is accurate, customers have demonstrated that they don't wait
+    Entity arrival rates are all independent of each other, and can be combined into a single queue
+    Not an attacker/defender game
+
+Jackson Network
+    Combine arival/routing for all entities to form a general arrival rate and generate routing probability
+    Single Server Nodes (Section node) can only service one entity at a time
+    Infinite server nodes (Route Node) can service unlimited entities in parallel
+    Entity arribes at a section, if car available moves from section node to route node and spends the travel time at that node before arriving at destination node
+    vehicles queue up at a section node and wait for entities to show up
+    
+Vehicle availability for Customers
+    Quantity of concern for attacker
+    As the fleet size increases, there are some sections with an availability of 1 (service right away), but some sections will have less than 1
+    The balancing process helps account for this unfairness
+
+Optimizing Attacks
+    Wants to
+        Minimizing the availability
+        Perform attacks within a certain radius
+        perform attacks at a rate that maximize objective within a budget b
+    Optimize Attack Routing (Fixed Rate)
+        attacks with a fixed optimal rate
+        computes the optimal routes to achieve this
+    Optimize attack rate (fixed routing)
+        Which rate should I release the attacks
+    Optimize budget of attacks (fixed availability)
+        the attacker knows that they can reduce availability
+        wants to minimize cost
+
+Attack Experiments
+    Controlling Vehicle Availabilities
+        shown to work
+        smaller radius makes it harder to control cars
+    Minimizing Vehicle Availabilities
+        Want to see the max damage we can cause to the company by minimizing
+        Sections with higher availabilities are prioritized over lower availabilities
+        Decreasing radius localizes attacks
+    Cost Analysis from Jackson Network Simulations
+    If MaaS wants to protect themselves, an increase of cancelation fees prevents loss
+        $15 shown to be optimal cancelation fee
+
+Improvements
+    Factor in hagh congestion
+    What could be done if the know about the zombie attacks
+    Other types of DoS attacks by shutting down the mobile application and analyze implications
+    What about other cities
+
 
 
 
