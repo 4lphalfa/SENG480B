@@ -1346,3 +1346,251 @@ Improvements
 
 
 
+==========
+2018-09-28
+==========
+
+An Analysis Framework for DoS Attacks on MaaS Systems - Simon Shen
+
+MaaS Systems have exponentially grown from 2013
+
+How to protect the company against DoS attacks
+
+Model the re-dispatch process
+A potential cyber attack on this process
+
+Re-dispatch process modeling
+    attacker is us
+    customers is represented the number of vehicles
+    balancers are used to fix an excess of customers
+
+Customer Modeling
+    Divide a city into N small indexed sections
+    Customer arival rate at city section i following a time-invariant poisson (random) process
+    customer from section i choose random destination j with probability
+    Travel time is an exponentially distributed random variable
+    Customer do not queue and sufficient vehicle M to queue for passengers
+
+Poisson Arrival and Property of Poisson process
+    Consider random events such as the arrival of jobs at a job shot. the arrival of email to a mail server, the arrival fo boats to a doc, the arrival of calls to a cla center.
+    The occurance of event is independent, but follows a certain rate lambda
+    Random splitting: superpositon of poisson process A(lambda 1) and poisson process B(lambda 2) has a poisson...
+
+Why exponential distribution
+    assume customer from section i -> j, the travel time T_(ij) equal to the inter-arrival time of the next arrival in j
+
+Rebalancing Modeling
+    Balancer generating rate at city section ...
+
+Cyber Security Modeling
+
+Conver to Closed Jackson Network
+
+Jackson Network?
+    CUstomer arrives at a sectoin node following a poisson distribution
+    customer picks another 
+
+CLosed vs Open Jackosn netowkr
+    if no additional customer enters and no customer leaving the network, the jackson network is closed
+    We have the assumption to make it closed
+        b/c we assume the number of vehicles and we assume the customers will never exceed M
+
+Formulate objective in the Optical attack problem
+
+System's state space
+    in a closed jackson network
+        M total num of states
+        N total num of Customers
+    Since sum is fixed
+        We can determine the system stae by the M-1 tuple
+    Jackson's theorem cannot be applied to closed networks because the queue length at a node in the closed network is limited by the poppulation of the network
+    The Gordon-Newell theorem calculates the open network solution and then elimitantes the infeasible states by renormializing the probabilities
+    G(M) is the nromalization constant associated to the equilibrium state distributed...
+    G(M) is expensive the compute
+    We instead learn the asymptotic availability
+    Since the asymtotic availability is relative, we find the section (indexed k) where the relative ability is 1, and minimizing over the remaining availabilities:
+        Wi is the user-defined arbitrary weights, depending on whether minizing the length of ride or the number of customers picked up
+
+Attack budget (Optimization constraint)
+    Attack budget is associated to the attack rate (zombie generation rate), when the system is balanced, we have
+    We find that if the attacker have unlimited budget, we can make the remaining availabilities infinitely close to 0, To make the problem reasonable, we add the budget constraint
+    We suppose the customer's and balancer's demands are given, and define their combined rates ....
+
+Formulation of the Optical Attack Problem
+    Non-convex and gradient has high complexity
+
+Divide into 3 sub problems
+
+Attack Routing Problem
+    The attacker can only inject attacks with fixed rates
+    Minimize the availability
+
+Minimum attack problem
+    Given a target of fixed positive...
+
+Attack Rate Problem
+    The attacker hacks the apps of the vehicles to display 'ghost' demands at specific sections...
+
+First 2 solved by CPLEX
+attack rate problem solved by...
+
+Test and Evaluation
+    The arrival rate is not balanced
+
+Minimum Attack Problem
+    "Cal," objective availabilities designated by the attacker
+    First balance the network, by apply MAP once with uniform availability 1 at each section as....
+    Arrows stands for routing directions
+    Smaller attack range results in larger efforts for the attackers to redirect cars.
+
+Relation between Radius and Rates in MAP
+    When the radius increases, rated lower, but there is a point of diminishing returns
+
+How much attack cost should be to prevent DoS on a MaaS system?
+    
+
+
+
+
+Vulnerability of Transport Networks to Traffic Signal Tampering - Kari Ewasechko
+
+Evolution of Traffic Signals
+    Standalone hardware devices -> complex networked systems
+    Transitioned to cyber attacks
+    Hardware based failsafes
+        attacks can't cause accidents, but can affect scheduling
+
+Issues
+    Impossible to prevent attacks
+    So assume attacks will occure
+    Impossible to predict all attack in polynomial time
+    Can secure all traffic signals in a system
+    Solution, Heuristic Algorithm
+        Identify critical signals
+        and secure these signals
+
+Daganzo's Cell Transmission Model
+    Goal: Typical network congestion of an umcompromised system
+    Time is divided into uniform intervals
+    Road network is divided into cells
+        5 types
+
+Ordinary Cells
+    Road segment that have one predicessor and one sucessor
+    Assume driver's do not stop/slow down without reason
+
+Diverging Cells
+    Road segment that have one predicessor and multiple sucessors
+
+Merging cells
+    Road segment that have multiple predicessors and one sucessor
+    
+Signalized Intersections
+    Merging cells with traffic signals
+    Inflow proportion is updated
+
+Sink Cells
+    Infinite capacity
+
+Source Cells
+    Infinite capacity
+    Finite output flows
+
+Solving the Traffic Model
+    
+The Attacker Model
+    Goal is to Maximize the total travel time of the system
+    
+Network Vulnerability
+    We can calculate the vulnerability by using the previous two times
+    A cell is critical if it is a signalize cell
+
+The Attacker's Decision Problem
+    Given a transportation network, a budgent B and a threshold travel time T*, determine if there exists an attack A satisfying the budget constraint such that ...
+
+Computational Complexity
+    Through proofs, we can say there is no polynomial time solution
+
+Heuristic Algorithm
+    Split into 2 parts
+        Find subset of compromized cells
+        Find the new worst case inflow proportions of these cells
+
+Running time
+    Upper bounded by polynomial function of the imput size
+
+Future Work
+    Algorithm to find resilient configurations efficiently
+    Study Similarities between critical traffic signals
+
+
+
+
+Attack Models and Scenarios for Networked Control Systems - Alex Rebalkin
+
+Intro
+    IT is important
+    The use of non-proprietary communication networks are vulnerable to cyber attacks
+    These attacks talk about both the cyber and the physical when talking about network control systems
+
+Modeling
+    Three Parts
+        Physical plant and communications netowrks
+        Feedback controller
+        Anomaly detector
+
+Physical plant 
+    communications is assumed reliable
+
+Feedback Controller
+    The physical plant previously discudded is controlled...
+
+Anomaly Detector
+    Detects deviations for the nominal behaviour
+
+Adversary Models
+    K is the system knowledge possessed by the attacker and I k is the set of sensor and actuator data available
+    The full aversary model is illustraded by the author
+
+Disclosure Resorces
+    Measurements that the attacker has aquired from the sensor data
+
+Disruption Resources
+    How an attack disturbs the system's operation
+    Physcal Attack
+        equivilent to fault signals
+    Data Deception
+        modify control actions and sesor measurements from calculate or real values
+    DoS Attakcs
+
+Attack Scenarios
+    Talk about the genreal goal: impact system operation
+    Likely choices of their attack policy
+
+Quadruple-Tank Process
+    Set up an experiment
+        QTP lab
+    Visuall demistrate system behaviour using four tanks of water
+
+Replay Attack
+    A network attack that gathers data and then replays it at another target to fool the system into believing legit data was recieved
+    Hacker wants to steal water
+    Attacker hacks one of the relay nodes
+        can then replace the measurements sent to the controller with their own data
+
+Replay Attack Results
+    The sensors were not able to see this attack
+    Successful
+
+Bas Injection Attack
+    Goal is to inject a constant bias without the system knowing
+    No disclosure abilities are required
+    We see the false bias was slowly injected using a first-order low-pass filter and a calculated steady-state value
+
+Conclusions
+    Authors analyzed the security and mapped possible attacks
+    Showed attacks, more than ones presented
+
+
+
+
