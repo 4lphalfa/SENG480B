@@ -1594,3 +1594,317 @@ Conclusions
 
 
 
+==========
+2018-10-02
+==========
+
+Attack Models and Scenarios for Network Control Systems - Sonia Barrios
+
+Defn
+    Zero dymanics: unbounded actuator or sensor to create an attack that is efficient enought o be detected after the damage is done
+    Bias Injection: False-data injection
+    Eavesdropping: Stealng info from devices using the network
+    Covert: Creates a capability to transfer info objects between processes that are not supposed to be allowed to communicate
+    Replay: attacker records valid data and replays it to break authentication
+
+Intro
+    The use of non-proprietary communication networks and heterogeneous IT components has made cyber-physica systems vulnerabile to cyber threats
+    ex. SCADA
+    Three main properties of computer security
+        - confidentiality
+        - integrity
+        - availability
+    Network control systems neeed to consider threats
+        - physical
+        -cyber
+    Control theory:
+        - detect and reduce the consequences of cyber attacks
+
+Networked Control Systems
+    Physical plant and communication network
+        The physical plant is modeled in a discrete time state space form
+        focused on data coruption due to cyber attacks
+    Feeback controller
+        To achieve the required performance in the presence of a unknown process and measurement noise, the physical plant is controlled by an appropriate linear time-inbariant feedback controller
+    Anomaly detector
+        Takes care of detecting deviations from the nominal behavior
+        It is on the controller, it only have access to the controller data to evaluate the behaviour of the plant
+
+Adversary Models
+    Attack policy
+    Adversary resources
+
+Network control system under Attack
+    Plant and controller states stacked as n_k
+
+System knowledge
+    important component of the advisary model
+        different attacks can occur depending on the knowledge of the system
+    Disclosure resources
+        ...
+Disruption resources
+    Related to the attack vector a_k and used to affect several components of the system
+        Physical attack
+            often with a cyber attack
+        Data deception attack
+            modify sensor data ...
+        Data DoS
+
+Attack Scenarios
+    General goal of an attacker and likely choices of the attack policy
+        Attack goals and constraints
+            ...
+
+Replay Attack
+    The attacker takes info from the system and then plays back the info that was recorded
+
+Attack policy
+    - the attacker can gather info from the corrupted digital channels and use it to create a physical attack
+Disclosure resource
+    - depends on the channels that can be compromised
+Disruption resources 
+    - It can only interfere with the data channels used to record the data
+System Knowledge- 
+    No prior knowledge of the system for the cyber component
+    physical component the knowledge needed is the sce...
+    ...
+...
+
+Zero Dynamics Attack
+    Require perfect knowledge of the plant dynamics
+    ...
+
+Attack policy
+Disclosure resources
+    none
+Disruption resources
+    depends on the ability of performing deception attacks on the actuator channels
+System knowedge
+    Perfect knowledge of oly the plant dynamics
+...
+
+Bias Injaction attack
+    Make false data without getting detected
+Attack policy
+    steady state attack policy where the attacker data corruptions are slowly converging to the steady state values
+...
+
+Experiments
+    Consisted of Quadruple Take process
+        Replay attack   
+            Goal was to empty the 4th tank
+            The attacker is able to hack the data between the sensor and controller. The real data from the sensor is recorded
+            The attacker the is able to send the recorded data to the controller while it is taking water
+        Zero Dynamics
+            Attacker that is able to corrupt all the actuator channels and inject false data without being detected
+            The attack remains undetected until the fast increment of attack signal causes saturation fo the water level and they system dynamics changes
+        Bias Injection
+            The actuator and the sensor were corrupted
+            THe attacker aimed at maxing the state bias while remaining stealthy
+
+
+
+Attack Models - Jiamin Fan
+
+Background
+    Properties related to Computer Security
+        C.I.A.
+    Attack space
+        A priori system model knowledge
+            Can be used by the attackers to obtain sensitive info and create a complex attack
+            Harder to detect
+        Disclosyre resource
+            used by the attacker to create...
+        Disruption resource
+            distrupt system operation
+
+Motivations and Contributions
+    Motivations
+    Contributions
+        Consider a typica architecture
+        An adversary model 
+        three stealthy attack scenarios are discussed
+
+Architecture
+    Network control system
+        The physical communication network
+            A discrete time state space form
+            f_k is the unknown signal representing the effects of anomalies
+            w_k and v_k represent the process and measurement noise
+            an alarm is triggered if the residue meets
+        Components of adversary Models
+            An attack policy
+            adversary resources
+        System knowledge
+            Core component of the adversary
+            Adversary knowledge is denoted by K = (model of the plant, algorithms used in feedback controller, anomaly detector)
+        Disclosure REsources
+            Data from the calculated control actions u_k and the real measurements y_k
+        Disruption Resources
+            Physical attack
+                happen in control systems along with cyber attacks
+            Data deception attack
+                modify the control actins and sensor measurements to corrupt signals
+            data DoS attack
+                prevents the actuator and sensor data from reachin their destinations
+
+Replay Attack
+    A valid message is intercepted and replayed back
+    performs a disclosure attack at first
+    Perform a physical attack while replaying the recorded data
+Attack Policy
+    corrupt the digital from which the data is gathered
+Disclosure Resource
+    the disclosure capabilities required to stage this attack corresponding to the data channels that can be eavesdropped by the attack
+Disruption resources
+    Correspond to the data channel that the attacker can tamper
+System knowledge
+    None needed
+Stealthyness check
+
+Experiment
+    Quad-Tank Process
+        Controlled through a wireless communication network
+        A Kalman-filter-based anomaly detector
+        Triggered according to what was introduced in the previous section
+
+Results - Replay Attack
+    QTP is operating at a set level
+    Attacker wants to steal water from tank 4
+
+Disruption Resources
+    Data DoS attack
+    Prevent the actuator and sensor...
+    ...
+
+Zero Dynamics Attack
+    Design an attack policy and attack signal so that the relates to the residue does not change due to the attack
+    Requires the perfect knowledge of the plant dynamics
+    There is no disclosure of sensor or actuator data
+    Only the actuator data is corrupted
+    The transmission zero can be calculated as the values v that causes the matrix p(v) to lose rank
+    An attack cannot be detected if the rank is reduced
+    if the zero is stable, little effect on the plant. In the case of...
+
+Results - Zero dynamics attack
+    Attack remains undetected for quire some time
+    The fast increment of the attack signal causes saturation of the water level, attack signal will be detected
+
+Bias Injection Attack
+    A particular scenario of false data injection
+    The attacker uses a linear low-pass filter
+    Inject a constant bias in the system without being detected
+    (The biases may be added to both the actuator and sensor data, no disclosure capabilities, no physical attack
+
+Results - Bias Injection Attack
+    The max attack impacts for all the combination of combinations of compromised sensors and actuators
+    The impact is unbounded when the adversary can attack more than two channels
+    u1 and y1 are corrupted
+    The attacker aimed at maximizing the state bias in the infinity-norm sense while remaining stealthy
+
+Coclusiont
+    Analyzed the securty of network control systems
+    Proposed an attack space
+    described adversary model
+    Replay, Zero Dynamics, and Bias Injection attacks were analyzed
+    The maximum impact of stealthy bias injection attacks were derived
+    Use an experimental setup based on a quadruple-tank process
+
+
+
+
+Comprehensive Experimental Analyses of Automotive Attack Surfaces - Tiany Song
+
+Intro
+    Modern cars are controlled by complex distributed computer systems
+    Unrealilistic to physicall connect to internal computer netowrk
+    Unresolved questions
+        Are external attacks possible
+        Are they practical
+        What are the greatest risks
+    Four Principle ideas
+        Threat model characterization
+        Vulnerability Analysis
+        Threat Assessment
+        Synthesis
+
+Background
+    Modern cars are controlled by differnt types of digital components ECU
+    ECU's are interconnected by common wired netowrks
+    Provide a broad internal attack surface
+    Unique apporach - how someone might be able to compromise its ECUs without direct physical access
+
+Threat Model Characterization
+    Technical capabilities
+        What the adversaries knows about the target vehices
+        Ability to analyze and develop malicious inputs
+    Operational Capabilities
+        Requirements in delivering a malicious input
+        Requirements can be put into 3 catagories
+
+Indirect physical access
+    OBD-II
+        Direct access to CAN
+        How to access
+            Handheld scan tool (old)
+            PassThru device
+    Entertainment systems
+        How to attack
+            CD
+            Song file
+            Social Engineering
+
+Short range wireless access
+    Attack surface for automotive wireless interface that operate over short ranges (5-300 meters)
+    Bluetooth
+    Remote keyless
+
+Long Range Wireless access
+    Automobiles include long distance digital access channels
+    Broadcast channels
+        broadcast recievers for long range signals
+    Addressable channels
+        Remote telematics system
+
+Vulnerability analysis
+    Experimental Context
+        Model
+            Less than 30 ECUs
+            Interconnected via multible CAN busses
+            Exposed to extenal vectors
+        ECU controll
+        Bridging Components
+        Three Pasic types of analysis
+            Raw code analysis
+            In sity observations
+            interactive debugging
+        Some ECU's were tougher than others
+    
+    Indirect Physical Channels
+        Media Player
+            Wireless broadcast signals
+            Standard Compact disk
+            Encoded audio formats
+            Two vulnerabilities found
+        OBD 
+            Access all can busses
+            Principle means for diagnosing and updating ECUs
+            Two Vulenrabilties Found
+                Attacker on the same wifi network as the OBD-II
+                Compromise the PassThru device itself and infect a greater number of vehicles
+
+    Short Range Wireless Channel
+        Bluetooth
+            Indirect short range wireless attack
+                Compromising a paired device
+                Trojan horse app
+            Direct short-range wireless attack
+                Sniffing bluetooth MAC address
+                Sending pairing request
+                Use laptop to send paring request and then brute for PIN
+
+
+
+
+
+        
