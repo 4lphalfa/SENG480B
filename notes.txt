@@ -1903,8 +1903,217 @@ Vulnerability analysis
                 Sending pairing request
                 Use laptop to send paring request and then brute for PIN
 
+    Long Range Wireless Channel
+        Cellular
+            Telematics Connectivity
+                Telematics unit relaies on the voice channel
+                aqLink software for conversion between voice and digital channels
+            Reverse engineering the aqLink protocol
+                the aqSend call allow people to send arbitrary packets
+            Vulnerabilities in the gateway and authentication
+                Stack based buffer overflow vulnerability
+                RNG number generator re-initialized whenever the telematics unit starts
+                ...
+
+Threat Assessment
+    How serious are the threats
+    What will be affected in practice
+
+    Financiall motivated theft
+        command a car to unlock
+        remotely disable security measures
+    Third party surveillance
+        can record data
+        easy to capture location
+
+Discussion
+    Fixes
+        Restrict access
+            manual bluetooth paring
+            Harden cellular interface
+            app-level authentication and incryption
+        Improve code
+            Security engineering
+            Remove debiggine symbols and error strings from deplayed ...
+            ...
+
+    Why do they exist
+        Not subjected to adversarial pressures
+        Interface boundary problem
+        Traditional methods are outdated
+
+Summary
+    Refined automotive threat model framework and implemented complete, end to end attack along key points of this framework
+    Concrete, finacially-motivated scenarios and evaluate the vulnerabilities
+    Pragmatic recommendatiosn for future car security and identify fundamental challenges
+
 
 
 
 
         
+==========
+2018-10-05
+==========
+
+Alexander - Same as me
+
+Background
+    All car functions are controlled by ECUs
+    All ECU's are connected through an internal wired network
+
+Related work
+    Physical access
+    Focus on the external attack surface
+
+Automotive THreat Models
+    Assume they have access to the same model car
+    Assume that they can reverse engineer or by info
+    Assume attacker has hardware
+
+Operational Capabilities
+    Indirect Physical Access
+        OBD-II Port
+            accessed through maintenance
+        Electric Vehicle Charging Port
+        Media System
+    Short ranged Wireless
+        Bluetooth
+        Remote Keyless entry
+        RFID 
+    Long Ranged Wireless
+        GPS
+        Satellite radio
+        telematics unit
+
+Experimental Context
+    establish a set of signals that could be sent over can bus
+
+Approach
+    Extract firmware
+    Reverse engineer 
+    raw code analysis
+    Observed each ECU implace with logging
+
+Indirect Physical Channels
+    Media Player
+        reflash the unit with whatever was on the CD
+        cause a buffer overflow 
+    OBD-II
+        Access all buses on the car by design
+
+Short Range Wireless
+    Bluetooth indirect
+        Attacker to have a paired bluetooth device
+        A trojan hore application will send attack payloads
+    Bluetooth Direct
+        Significant development time
+        the user doesnt have to ask for pairing
+
+Long Range Wireless
+    Cellular
+        reversed engineered aqLink protocol
+        when restarted, it reseeds the rng with the same number, causing the nonce to be static
+
+Threats
+    Theft
+        similar progression to computer virus
+    Surveillance
+        
+Suggestions
+    Simple
+        Don't allow unauthorized bluetooth access
+        Cellular interface should not allow inbound calls
+    Other
+        Code didn't include best practices
+            Had debugging code
+        Dont allow outbound internet connections to arbitrary destinations
+        ECUs should only be re-flashed by the bus with the smallest external attack surface
+        Issue found at the intersection of two components
+
+
+
+Stability and Scheduability - Matthew
+
+Major Contributions
+    New Task Model
+        Present two new scheduling mechanisms
+            offline parameter assignment
+            online state aware scheduling
+        Demonstration of the solution
+
+Questiona
+    Guarentee system stability and control quality
+        Limited cyber resources
+
+existing Solutions
+    Explore sampling period
+        How often you sample from a system
+
+    Task period - how often a task must run
+
+Control scehdule codesign
+    find optimal task period , how often it should run
+    Sudden changes into input in the systemd
+    
+Fault Tollerant Schedulint
+    allow occasional missess
+    based on the asumpion that scheduling is fixed
+
+System
+    abandond -> the next one is then computed
+
+Case studies
+    Adaptive cruise control
+    Lane keeping
+    DC servo control loops
+        controls acceleration
+
+Questions
+    44.1 KHz
+
+A mental Model
+    Similar to how sound is stored on a computer
+    They only store binary info - can not store continuous stream
+    smaller blocks, smoother curve when stuck back together
+
+Motivation
+    if you have a higher stampling periond, you can allow for more updates in the same amount of time
+
+New Task Model
+    Each task is a pair
+        Control - known a head of time
+        Scheduling - while system is running
+
+New Task Model Control
+    set of stable pairs
+    Adaptive Cruise Control
+        
+New Task Model Scheduling
+    Scheduling
+        Relative Deadline
+            how much time you have left
+
+Problem Statement
+    P1:
+    P2:
+    parameters: scheduling period, num of consecutive misses
+
+Solutions
+    P1:
+    P2:
+
+Online Parameter Assingment
+    Find stable parameter assingment 
+        you cant give it a control that leaves a system in a unstable state
+        Ideally performance optimal
+
+
+Offline Parameter Assingment
+    Schedule more important first
+    
+
+
+
+
+
