@@ -2092,7 +2092,7 @@ New Task Model Control
 New Task Model Scheduling
     Scheduling
         Relative Deadline
-            how much time you have left
+            Starting withing the time period, how much time you have left
 
 Problem Statement
     P1:
@@ -2100,18 +2100,287 @@ Problem Statement
     parameters: scheduling period, num of consecutive misses
 
 Solutions
-    P1:
+    P1: ofline paparmeter assignment
     P2:
 
-Online Parameter Assingment
+Offline Parameter Assingment
     Find stable parameter assingment 
         you cant give it a control that leaves a system in a unstable state
         Ideally performance optimal
 
 
-Offline Parameter Assingment
+Online state aware scheduling
     Schedule more important first
+    Determing which is critical/non-critical 
+        Skip non-critical
+
+    Jobs get emmited by job emission queue into job_release
+    Put into wait queueu
+    Should we put the task in the ready or wait queue?
+        Critical -> ready
+        Non-critical -> wait
+
+Evaluation
+    2 metrics
+        How may jobs are able to be scheduled out of all of them
+        How much work can actually be done
+
+    Adaptive Cruise Control
+        Worst case was alwasy 15ms
+
+Approaches
+    One where you just change the period
+    Static period assignment where you must run every job
+
+
     
+
+
+
+
+==========
+2018-10-09
+==========
+
+ - William Birney (Skipped because of tech issues)
+
+
+Closing the Gap between Stability and Scheduability: A New Task Model for Cyber-Physical Systems - Tyson Battistella
+
+What is a CPS
+    Engineered system with both physical and computational components
+
+Main Challenge
+    Bothe resource efficient and stable
+    CUrrently a gap
+
+Guaranteeing Task Deadlines
+    Real Time Task -  sequenst of task with a deadline
+
+RMS
+    Assings priority 
+    good for fixed period
+    Runs into problems where you won't be able to complete a task within our deadline
+    Static
+
+Earliest Deadline FIrst
+    Main difference: compares them relative to the deadline
+    Dynamic
+
+Both try to avoid missing deadlines
+
+Guaranteeing Stability
+    Not all tasks have hard deadlines
+    A large percent of the resources can stay unused
+
+Proposal
+    Identify key parameters
+    Understand the relationships
+    ...
+
+Linking COntrol and Scheduling DOmains
+
+CPS runs in the following cycle
+    Sampling Period
+        1
+        2
+        3
+    The rate at which it is sampled is called sampling period
+
+Case Study
+    Focused on Autonomous Vehicles
+
+Linking COntrol and Scheduling DOmains
+
+Testing out a new task model
+    Use less resources
+
+Increasing Stability
+    Tweaking sapling period
+    different combos of the two attributes changes its resilliency
+
+Increasing Control Performance
+    The larger the index, the worse performance
+
+Allowing more update misses with shorter update misses is better for performance
+
+Goal
+    Find optimal control performance and stability
+
+New CPS Task Model
+
+Control
+    represents each task with a set of stable paris (the + seen before
+
+Scheduling
+    T sampling period
+    C
+    D
+
+We know the stability pairs and worse case exec time
+Find out period and max update misses
+
+WHy not a existing Task Model
+    Assume a fixed task period, cant take the relationship between
+
+Problems
+    Finding the potimal parameter assingmnet
+    Generate schedule based on the current state of the physica components
+
+Finding the optimal parameter assingmnet
+    Offline patameter Assingment
+        if every critical job is done, the system will be stable
+        So don't schedule anything that isn't critical
+
+Schedulability Analysis
+    Any task that has a higher priority can be scheduled
+
+Guarenteeing stability
+    A set of stable pairs
+    A guanentee ...
+    ...
+
+Maximizing performance
+    The reseaches used the number of .. techniques
+    Limit the options that the algorithm can choose from
+
+Problems
+    Fixed first one
+    Generating a scehdule based on the state of the physical component
+
+Schedule Generation
+    We can only schedule critical jobs to be stable
+    There is some optimization becuaes of down time
+
+Online State Aware Scheduling
+    Seletc non-critical jobs to be scheduled during down time
+    1 Hon many non critical jobs max performance
+    2 How can we ensure all critical jobs can still be scheduled
+
+Proposed Algorithm
+    If the job is critical, append to the ready queue
+        Sort the ready queue
+    Else add to waiting queue
+        Sort the waiting queue
+    Every event, see if we can move any waiting queue jobs to the ready
+        Check if jobs can still be scheduled
+
+Evaluations
+    Metrics
+        Scheduability Ratio
+        Control Performance Index: difference between desired and actual state
+
+    Simulation Setup
+        All were run on a uniperformance platform
+
+    Comparisons
+        Our-PA-SAS (described peviously)
+        Our-PA (only critical jobs)
+        DPA-EDF
+        SPA-RM
+        ...
+    Scheduability Results
+        Only critical is the best, but there is downtime
+
+    Control Performance
+        simulate each control plant for 30s
+        With less resources available, larger gap in performance index
+        Online State Aware 32% better than Offline
+
+Conclusion
+
+
+
+Scheduling ALgorithms for Multiprogramming in a Hard Real-time Environment - Hilary Dechert Ayres
+
+Introduction
+    
+WHy Scheduling Algorithms
+    Fixed prioity 
+    Dynamic priority assingment
+
+Background 
+    Soft - 
+        miss deadlines are ok
+        Quality of service
+    Hard
+        Missed deadlines are NOT ok
+        Control Performance
+
+Set UP
+    5 assumptions 
+        1. Contrasts to some opinions
+        2. eliminates queing problems
+        3. Doesnt exclude the situations
+        4. Max processing time for tasks
+        5. Self explanitory
+    Scheduling Algorithm
+        Priority
+        Static
+        Dynamic
+        Mixed
+            of static and dynamic
+    Periodic Tasks
+        Each instance of the task is called a job, same relative deadline that is equal to the period
+    Task
+    Priority
+        high is more important
+    Deadline
+        Time of the next request of the same task
+    Overflow
+    Feasable
+    Response time
+        Time between responce and
+    Critical Instant
+    Critical Timezone
+
+Fixed Priority Scheduling ALgorithms
+    Task with the lowest prioritys
+        Between the two request times
+            Movement of taks will cause a delay
+            will only be advanced or delayed
+    The requests for all the tasks are finished before all the deadlines
+    Determine whether it will succed or fail
+    Tasks with a higher request rate has a higer priority (rate-monotinic)
+
+Achieve Processor Utilization
+    fraction of the processor time spent of the task set
+    Q? How large can we get it?
+    What does full utilization mean?
+    Theorem 3
+        more bounded version of the next theorem
+    Theorem 4
+        Least upper bound can be found when...
+        Computing the least upper bound 
+    Theorem 5
+    All this give us the Scheduability Test
+    Better way, assign tasks dynaimically
+
+Deadline Driven Schedule ALgorithm
+    Each priority, if it has a upcomming deadline, higher priority
+    Priorities may change with time
+    If overloaded, it become unpredictable
+    Theorem 6
+        Establishes Earliest Deadline First Algorithm
+    Theorem 7
+        if total demand exceeds, not scheduling algorithm possible
+
+Mixed Scheduling Algorithm
+    Doesnt appear compoatable with hardware scheduling
+    Now, most computer prefer fixed scheduling
+    Availability
+    Theorem 8
+        Similar to theorem 6
+    Theorem 9
+        Similar to theorem 7
+    The constraints from theorem 9, 100% utilization is not possible universally
+
+Conclusion
+    Most important assumtions are 1 and 4
+    Rate Monotonic Scheduling algorithm
+    Least Upper bound: order of 70%
+    Earliest deadline first scheduling algorithm
+    ...
 
 
 
