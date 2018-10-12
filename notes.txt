@@ -2386,3 +2386,309 @@ Conclusion
 
 
 
+==========
+2018-10-12
+==========
+
+Closing the Gap between Stability and Schedulability: A New Task Model for CPS - William Birney
+
+Found that they are related, but not much research about changing them at the same time
+    Merge the two - look at them at the same time
+
+Past Research
+    Currently to achieve physical stability (drone) Loop
+        If its not able to run to compleation - control update miss
+    In the cyber world, we don't worry about physical stability
+    Assume tasks at a constant runtime
+
+State of the art
+    In a state of CPU overload, suspend lower priority tasks in response
+
+Stability vs scheduling
+    Vertical: running/not running
+    Horizontal: time
+    Control update period: task must run in the amount of seconds
+
+    Case one
+        Difficult to schedule
+
+    Decrease Control Update Period, increase deadline
+
+    Case 2
+        Takes more cpu time
+        we have to assume we can run less tasks on our cpu
+        Not all benefit from this, depends on the type of task
+
+Approach
+    If we have a hard realtime system, we can't miss 
+    Solution is between hard and soft realtime system
+    Lowering Control update period and increasing misses mimics a hard real time system
+
+Case 3
+    The ideal case because we get max cpu efficiency
+
+Implementation
+    1. Ready queue - Regular scheduling (deadline monotonic)
+        Only for tasks that are critically important
+    2. if you still have spare resources move on to non-critical tasks
+        based on accumilative error
+        More efficiently use your cpu cycles
+
+RQ-170 (2011)
+    Drone went down
+    As far as we know, Iranian recorded gps information and replay it after jamming the GPS signal
+    The put an acceleromitor to help tell where you are from where you started from
+        You have to schedule this along with regular drone tasks
+        We have to accomidate this
+        This is why they favoured GPS for their tracking
+
+Use Cases
+    Also works for systems that don't accumilate over time
+    Multicore cpus, improve unscheduled time
+    Improved average stability (cruise control)
+
+Disadvantages
+    This is just a generalized version of regular scheduling that is harder to implement
+    The scheduler has overhead
+        The scheduling eats up cpu time itself
+        The ready/wait queue system helps, but is not perfect
+        O(n^3)
+        For lots of task, this might not be ideal
+
+Better way of taking your spare cpu cycles and making use of them
+
+
+
+Deep Value of Information Estimatiors for Collaborative Human-Machine Information Gathering - Hailey Baron
+
+Human Machine Interaction
+    Humans being used as "soft sensors"
+        object position, velocity, 
+
+Soft Sensing
+    Little work has been done on active soft sensing
+
+Sensor Scheduling Problem
+    How to select the best sensing assets given constraints
+        Computational limits
+        find what info we can get from the humans
+        What the most valuable info that we can give the machines
+        When/how this info can be obtained
+
+Deep Learning
+    emerging branch of machine learning
+        Convolutional Neural Network, prefered method
+    Recent studies go into the predicitons 
+
+Human Maching Collaborations
+    Focus on target tracking in an environment
+
+Prbability: Target Located
+    environment is a 2D grid
+    The target location is somewhere inside the 2D grid
+
+Bayes' Rule
+    Once you add it all together we get this big equation
+    The soft sensor and hard sensor are conditionally independent
+    
+Likelihood
+    hard Sensors
+        Given in the program, not calculated
+    Soft Sensors
+        Can only be approximated
+
+Define Hard and Soft Sensors
+    ......
+
+(Continued Next Class)
+
+
+
+
+Deep Value of Information Estimatiors for Collaborative Human-Machine Information Gathering - Richard Haengphosakul
+
+Introduction
+    Research wants to explore how human observation can improve continuously monitored data
+    There is a sensor scheduling problem
+        What camera to choose to get the most info possible
+    What info should be obtained/collected
+    Tackling this problem using deep learning
+
+Value of Information
+    This metric will be used to pick the machine sensor for the best info at a certain time
+    This in NP-Hard
+
+Deep Learning
+    Used to estimate the value of information
+    Uses multiple levels of abstractions that doesn't need manual tuning
+
+Problem Setup
+    The environment is completely covered in sensors
+    Is 2D
+    A human sensor may walk around the map freely
+    Assume human has some way to communicate their data
+    The intruder is moving around the map randomly
+    With this setup, the problem becomes how to obtain a proper set of measurements
+        This becomes difficult because the human sensor can give additional information
+    They think that this can help avoid task overload
+
+Framework
+    Belief Map:
+        Greyscale image where high intensity shows high belief
+    Policy Learning:
+        Takes a belief map as input
+            It is vectorized when put into a CNN
+    Reward Learning:
+        Takes in the sensor map
+            Contains the coordinates from a camera that isn't included on the map
+        Adds padding to prevent mixing
+    Training Data Generation:
+        For both frameworks, 10000 examples are collected from the 10000 timesteps
+            5000 is used for training
+            5000 is used for cross-examinations
+        60000 examples for reward learning (because of 6 cameras)
+
+Result
+    the figure shows that the CNN be trained to learn and prduce the value of information that is produced by brute force
+    Most of the error comes from camera 5 and 6 (which are close together)
+    CNN is able to predict the value of information close to true that of unseen belief map
+    Policy Learing (Which seems to preform better) is effected less by the traning than the Reward Leaning
+    Reward learning can be more valuable where the info changes slightly
+        It will not need to be retrained
+        It is adaptable
+
+Semantic Soft Data Scheduling
+    Scheduling for pulling data from the human sensor
+    Cop and Robber robots who move around the map freely
+    Assume human view through cop
+        Human is limited by only viewing one camera at every timestamp
+    Cop can ask a human a binary question every 5 timestamps
+
+    'Figure 9' has 16 possible questions
+        "Is the robber close to the dinning table"
+    
+    Rather than a sensor map, it is replaced by an action map
+        Separated into nodes that the cop can ask the human for each one
+    91.33% accuracy of asking the human sensor the right question
+    Most of the errors come from when the intruder moves from one room while the cop is still focused on the original room
+
+Conclusion
+    Uses deep learning to predict Value of information
+
+Policy vs Reward learning
+    Gathered the same info (value of information)
+    Reward Learning has an additional sensor map made from a separate free-moving camera
+
+
+
+
+
+Intrusion Detection Systems and Multisensor Data Fusion - Gloria Wang
+
+Background
+
+    Problems
+        Real-time ID systems are not advanced
+        False Alarms
+        Network Management is expensive
+
+    Why to write
+        Consumer market is growing quickly
+        Help develp and research in the area of malicious code...
+
+ID System Overview
+    
+    Approaches for Intrusion Detection
+        Pattern Templates
+    
+    background of ID Systems
+        
+    Host Base ID Systems
+        Rules based pattern matching system
+        Based on 
+            Weighted functions
+            Matrix based
+            Rules Based
+
+    Multihost Network based
+        
+    ID System Data Fusion
+        Data Fusion
+            Combines data from multiple diverse sensors to make inferences
+            Mainly used in military and commercial
+        Input/Output Data
+            Input
+                raw data collected in many ways, formats are usually different
+            Output
+                More intelligence based, estimates the identy of an intruder
+
+Characteristics of Multi-sensor dased on Waltz model
+    Detection Performance
+        it is a detection characteristic, such as false alarm rate, detection probabilities and ranges
+        Uses multi-sensors to combine data
+    Spacial/Temporal resolution
+    Spacial Coverage
+        span of the coverage
+    Detection/Tracking modes
+        mode of operation of the sensors
+    Target Revisit rate
+        rate at which a cyber target or ...
+    Measurement accuracy
+        Statistical probability that the sesoor measurements are accurate
+    Measurement Dimensinality
+    Hard vs Soft data reporting
+        the status of the sensor reports
+    Detection/Tracking reporting
+        characteristics of the sensor report
+
+Hierarchy of IDS data-fusion inferences
+    Lowest is the existence of an intrusion
+    Rate of intrusion
+    Identity of intruder
+    Behaviour of intruder
+    Situation assessment
+    Threat Analysis
+
+OODA
+    Observe Functions: techincal and human collection of data
+    Orient Function: data mining from recorded data and computer files
+    Decision Function: determination of appropriate actions or countermeasures
+    Act Function: automated and human responses
+
+OODA can be mapped into three levels
+    Knowledge: info explained and understood
+    Information: placed in context
+    Data: measurements and observations
+
+ID System Data Mining
+    
+    Definition
+        offline knowledge creation process
+        used to discover hidden, but previously...
+
+    Data fusion vs Data mining
+        Interference method and temporal perspective
+            Fusion focus on the future
+            Mining focus on the current state
+
+    Problem
+        How to reconsile the raw data from many different formats
+
+    Operations Summarized by Waltz
+        Clustering: 
+        Association
+        Statistical Analysis
+        Rule Abduction
+        Link or Tree abduction
+        Deviation Analysis
+        Neural Abduction
+
+Challenges in ID system Fusion
+    Hard to extend the groundwork to develop a structured meta-language
+    Tracking and accessing
+        
+
+
+
+
+
