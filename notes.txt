@@ -2467,6 +2467,7 @@ Human Machine Interaction
 
 Soft Sensing
     Little work has been done on active soft sensing
+    similar to capatcha(not a robot)
 
 Sensor Scheduling Problem
     How to select the best sensing assets given constraints
@@ -2501,6 +2502,108 @@ Define Hard and Soft Sensors
     ......
 
 (Continued Next Class)
+
+Define Hard and Soft Sensors
+    Each of the big squares represent a camera
+    Humans can see the camera and say if they see the target or not
+
+Selecting hard or soft data
+    The data fusion center can look at either one hard or one soft sensor
+    Human sensors can give much more data
+    WE can create a library for our hard sensors to ask our human
+        can be answered freeform (not binary)
+
+Pushing vs Pulling from human sensors
+    Pushing: human will just tell the info
+    Pulling: machine will ask the human to give info at a certain time
+    this issues can be delt with value of information stuff
+
+Long Story Short
+    Value of Information = How worth it it is to colect the resources for info
+
+VOI problems
+    Very expensive and take a long time
+    What we have to do is find ways to estimate
+
+POMDPs
+    allow optimal sensing policies to be computed offline
+        online resources can be expensive to pull from
+    The sensing queries are a list of questions we are going to ask
+    We are looking at AMDPs
+        Biggest bonus is that we can use them for every single combo and every future combo
+
+Deep CNNs
+    the questions are used to train a CNN
+    Very easy to train
+    We are using it because it's designed to exploit 2D structures
+
+CNN Maxpooling
+    when you use different layers of images to express different things
+    After all of that is done, the fully connected layers is joined based on the highes joint probability
+
+Types of Learning
+    Policy Learning
+        Take a single belief state image, places with darker is more likely to contain a target
+        Then vectorized into
+    Reward Learning
+        Similar, but also adds an arbitrary sensor
+        Same size as the belief sensor, but must add padding to prevent issues
+        This creates a larger image and becomes our input to train the CNN
+
+Training Data Generation
+    false alarm rate of 50%
+    If we use Policy, it only looks at the best sensor, half is used for training
+    Reward, it looks at all the sensors, its a bit better because it allows us to look a future steps
+
+Network Architecture and Hyper-parameters
+    learning rate is used to look at the math
+    the optimized model is where ...
+
+CNN Results
+    accuracy was quite high
+    only wrong twice
+    However, the errors were likely caused by camera 5 and 6 being close together
+
+Policy was more acurate, Reward is more adaptable
+    Policy is a simpilar model, faster to teach
+    Reward, can see into the future, is better when changing little things
+
+More on AMDPs
+    can be used to derive scheduling policies
+    even though its an estimate
+
+Setting up the AMDP
+    Sutible featuers:
+        knowledge ganed through experience
+        entropy increases, the less we know about what is going to happen
+    In comparison to the CNNs
+        AMDP sometimes we don't know what's happening at all at points, but can be better than the CNN
+        To know which one is actuall better we must look at error
+        CNN error happens to be better
+            we want the error stacked on the lower side
+
+Semantic soft data scheduling
+    Cops and robers secnario
+        Cop, robber, and human security guard
+            human can see only one camera at a time
+            can ask one question every 5 time steps, only answered in binary
+        16 possible questions
+            questions are ranked by their VOI
+
+CNN Training
+    used reward learning
+    divided into 16 nodes linked to the 16 questions
+
+Results
+    The CNN was 91.33% accurate
+    most errors occur when the target moves
+    Shows we can use deep learning for this 
+
+Summary
+    Wasn't using anthing with a real human
+
+Future Work
+    we do online tuning of deep networks
 
 
 
@@ -2687,6 +2790,125 @@ Challenges in ID system Fusion
     Hard to extend the groundwork to develop a structured meta-language
     Tracking and accessing
         
+Conclusion
+    Challenges
+        Combine data and info from numerous agenst and managers into a coherent process that can be used to evaluate the security of cyberspace
+        Requiring the integration of numerous diverse ....
+
+
+
+
+
+==========
+2018-10-16
+==========
+
+Intrusion Detection Systems and Multisensor Data Fusion - Oscar Costa
+
+Motivations
+    Realtime IDS is not good enough vs Sophisticated Cuber Attacks
+
+Intrusion Detection Systems
+    Kind of system designed to ensure CIA
+    To ensure this, the system has to protect against
+        Known attacks
+    Requires automated detection and immediate reporting
+
+Host-Based IDS
+    Find deviations on system
+
+Network IDS and Distributed IDS
+    Network:
+        analzed the traffic passing though the network, not just the host
+    Distributed:
+        combines host based IDS and traffic netowrk monitoring
+    Challenge: different attack sources so its hard to detect the actual target and source
+
+Multisensor Data FUsion
+    Enginnered that combines multiple sensors and sources to form a unified picture of activities
+    Compared to human cognitive process
+    Requires lost of math
+    Applications on IDS: system logs, user commands, ...
+
+Multisensor Fusion Characteristics Applied to IDS
+    Detection performance: how efficienct is the system, differentiate 
+    Spacial: distinquish between two or more attacks 
+    : coverate of they sensors
+    : mode of operation of the sensor (waiting or scanning, or tracking singular/multiple)
+    : 
+    : Probability that the measurement is accurate
+    : measurements between cyber
+    : If a decision was made withouth multiple sensors
+
+Dicision-Support systems applied to IDS
+    Technical and human collection of data
+    OODA
+        Observe
+        Orient
+        Decision
+        ...
+
+IDS Data Fusion
+    Level 1 goes to an Object Database
+
+Data Mining - Operations
+    Clustering
+    Association: analysis of
+    Statistical Analysis: 
+    Rule Abduction:
+    Link or Tree abduction:
+    Deviation analysis:
+    Neural Abduction:
+
+IDS Data Mining
+    (Long explanation)
+
+IDS Data Fusion vs IDS Data Mining
+    Data fusion focuses on data
+    Data Mining creates new data that is not know yet
+    Data fusion goes from the detection to the knowledge
+
+Challenges in IDS Data FUsion
+    Fuze Data from heterogeneous distributed sensors
+    Develop a structured metalanguage
+    Temporal calibration of different data sources
+    Correlation in Cyberspace
+    Automated identification and tracking of intrusion subjects
+    Application of mathematical techniques from Multisensor data fustion 
+    Application of modern technologies
+
+Conclusion
+    Complexity of cyberspace realm
+    Multisensor data fustion requires integration of diverse diciplines
+    Dynamic cyber-data mining
+
+
+
+Intrusion Detection Systems and Multisensor Data Fusion - Luis Rivera
+
+Intrusion Detection
+    Today, systems are comprised of components that are interconnected
+    Attacks can effect the current system
+    We neet to detect, prevents, and estimate intrusions
+
+Intrusion Detection Systems
+    Protect information structures
+    we need to consider 3 aspects: CIA
+
+Techniques for Intrusion Detection
+    Know Patter Templates
+    Threatening Behaviour Templates: look at the behaviour of the attacker
+    Traffic Analysis: When we need to understand the dataflow in our network
+    Statistical Anomalies: When we detect some outliers in the measurement of the network
+    State-based: When we consider systems as state machines, and the system goes to an unwanted state we can report a intrusion
+
+Approaches for Intrusion Detection 
+    Host-based: Analyze the network, but only one central point and not the full thing
+    Multihost Network-based: we can have multiple hosts that will analyze the network at certain points, ID is distributed into the networks
+
+Detection Reliability
+    We need to produce reliabile detections
+    Must catch everything but avoid false alarms
 
 
 
