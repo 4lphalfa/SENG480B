@@ -2910,6 +2910,305 @@ Detection Reliability
     We need to produce reliabile detections
     Must catch everything but avoid false alarms
 
+Data Fusion in ID Systems
+
+Multisensor Data Fusion / Distributed Sensing
+    Combine data from multiple sources
+        similar to the brains data fusion process
+    Applications
+        Military
+        Commercial (Robotics, manufactoring, etc..)
+
+Multisensor Data Fusion Ecosustem
+    Have multiple devices that provide data that we can analyse
+
+Multisensor Data Fusion Requirements
+    Statitics: models, outliers
+    AI:
+    Operational Research
+    Digital signal processing: 
+    Pattern Recognition
+    Cognitive Psycology
+    ...
+
+Multisensor Data Fusion Requirements - Seensor Considerations
+    Detection performance
+    Spatial/temporal resolution
+        distinguish between two intursions in space or time
+    Spatioal Coverage
+    Detection/tracking Modes
+        Mode of operation of the sensor
+    Target Revisit Rate
+    Measurement Accuracy
+    Measurement Dimensionality
+        number of variables to consider
+    Hard vs Soft data reporting
+        status of the sensor reports
+    Detection/Tracking reporting
+        individual vs set of events for reporting
+
+Multisensor Data Fusion Requirements - Situational Awareness
+    Inference: high measn that it is good at tracking
+    Decision Support Systems OODA
+        Observe: collection of data
+        Orient: Discover previous unknown characteristics in the data
+        Decision: determination of appropriate actions
+        Act:
+
+ID Data-Fusion Model
+    1. data Collection
+    2. Data Refinement
+    3. Object refinement (data is placed in context)A
+    4. Situation Refinemnet (when the system is able to produce new knowledge) situational awareness and knowledge
+
+ID Systems Data Mining
+    not using real time data
+    All data is historical
+    Trying to produce previously collected data
+    Discovering hidden by previously undetected situationl...
+    ...
+
+Data Fusion vs Data Mining
+    Inference Method
+        Fusion: when the system detects a certian templace
+        Mining: search for hidden patterns
+    Temporal Perspective
+        Fusion: the curent status of the system
+        Mining: based on historical data
+
+ID Data Mining Model
+    1. Try to collect and index raw data
+    2. Data clearing, checking it is correct
+    3. Data filtering and transformation
+    4. Data Mining Operations, allow the intrusion detection system to produce some data from the historical data
+    5. Predict future events
+    6. Model tuning
+
+Data Mining Operations
+    Clustering: data segmentation
+    Association: analysis oof cause and effect
+    Statistical Analysis
+    Rule Abduction: if-then-else
+    Link or tre abduction: 
+    Deviation analysis
+    Nural Abduction
+
+Challenges
+    Data Refinement
+        complex: refine data coming from several devices
+        develop a metalanguage that can manage
+    Temporal calibration of numerous streams of raw data and security of communication protocols
+        data from heterogeneous sources
+        consider the schedulability
+    Identification and tracking of dynamic intrusion and correlation of events
+        several dimensions
+        trying to find these are not easy
+        the attacks can come from many sources that are distributed
+        trying to identify this is difficult
+    Application of Mathimatical techniques for multisensory data fusion...
+        Gating
+        Association
+        Assignment
+    Application of mathimatical methods for decision-level identify fusion
+    Combining knowledge from several diciplines
+    Knowledge fusion
+        between the data fusion and data mining models
+
+ID Systems Research
+    
+Conclusions
+    fusing data involves considering several diciplines
+    Data fusion is a crucial point in both ID systems and CPS
+    IDS is a relevent research area
+
+
+
+
+==========
+2018-10-19
+==========
+
+An intro to Multisensor Data Fusion - Tyler Reese
+
+What is It?
+    More like radar, infared, flare systems
+    You have a robot with an actual position
+    you mount a few sensors to track position
+    You have a sensor fusion algorithm and input the data
+        output a more accurate location
+
+Terms
+    Entity:
+    Alingment: bringing sensor data into the same frame of reference
+    Association and correlation:
+
+applications for multi-sensor data fustion
+    Trying to use sensor data observations to make inferences
+
+Issues
+    In practice, it can produce worse results (vs single sensor)
+
+        Application specific fusion system
+            What accurate techniques?
+            What architecture should be used? place the fusion point in difference spots
+            How to process, Some sensors can give data in different forms
+            Accuracy
+            Optimization in a dynamic sense (ex machine learning)
+            Environmental interference
+            Are multiple sensors optimal
+
+    Lack of unifying terminology
+
+        Data Fusion Process Model - "The JDL Model"
+            Bridging military and civilian
+                Sources
+                HCI
+                Data Fusion Domain
+                    Source Pre Processing
+                        Takes the data and tells the system to focus on the best data
+                    Level One: Object refinement
+                    Level Two: Situation Refinement
+                        Relationship between certain entities
+                    Level Three: Threat Refinement
+                        Makes predicitons about the battlefield, infers the threat level 
+                    DB Management System
+                Level 4 Process Refinement: Identifies how to improve performance
+
+            Breakdown of some of the processess
+
+        Architectures: when to fuse the data
+            
+            Centeralized Fusion (The most precise, but raw data must be offloaded to processing units)
+                Stars off with alinging all the sensor data
+                Then does correlation
+                Finally fusion is does
+            Autonomous Fusion (bandwidth is reduced, alingmnet and correlation taks less computation, but since raw data isn't used info is less accurate)
+                Each sensor comes up with an escape vecotr
+                Vectors are then fused
+                Alingment and correlation occurs
+            Hybrid(Flexible, stars with state fusion, than data level fusion. Lots of overhead)
+            
+        Architectures for Identity Fusion
+            Data level fusion (Data...j
+                data level fusion of raw sensor output
+                Identify declaratino performed
+            Feature Level Fusion
+                Sensors provide observational data
+                Features vectors are extracted, alingned/...
+                ...
+            Decision level Fusion
+                Each sensor declares the identity
+                Identity declarations are combined
+            Paper suggests a selection is dependent on the resources available
+
+Knowledge Based Methods for Data Fusion
+    Goal is to captre the ability to automatically reason
+    Give the system the ability to do human like things
+
+The State of the Art
+    Level 1 processing is the most researched
+
+
+
+
+
+Intro to Multisensor Data Fusion - Leon Li
+
+Intro
+    Data Fusion: Combine data to achieve higher accuracies
+
+Terms
+    Fusion: integration of info from multiple sources
+    Raw Data Level Fusion: Observational data, can only be fused if measuing the same quality
+    Feature Level Fusion: 
+    Decesion level Fusion: 
+    Alingment: important at differnt levels of fusions
+    Association:
+    Correlation:
+    Correlator Tracker: 
+    Classification
+    Situation Assessment:
+    Threat Assessment: mostly used for military applications, but can be altered for non-military
+    
+    Inference Level 
+        Low
+            need to know if the entity exists
+            Position or velocity
+            Identity of emitter or platform
+            Behaviour of an entity
+            Situation Assessment
+            Threat Analysis
+        High
+
+What we do about the fusion data
+    Determing the targets position
+    Establish the target's identity
+        patter recognition
+    Find out the target's intent
+        automated reasoning
+
+Fundamental Issues of building a DF System
+    4. 
+    6. 
+    7.
+
+Military Applications of Data Fusion
+    Focus on location, characterization, and indentification
+    Occean Survalience
+        under the water the propagation array could be large, but we want real time data, these point clash
+    Air to air/Surface to air
+        enemies countermeasures, need for rapid decision making
+    Battlefield
+        
+Non Military Applications of Data Fusion
+    solve problems in robotics, automate control, smart buildings, and medical applications
+    Monitoring mechanical equipment
+    Medical Diagnosis
+        signal propagation environment, obtaining training data
+
+Data Fusion Process Model
+    Input: post detection, extracted paramater level of signal processing
+    Output: min...
+
+    Sources of info:
+        sensors, and other data
+    Human Computer Interaction
+        allows human inputs
+        comunicates the results
+    Sources Preprocessing (Process Assingment)
+        Data cleaning precess
+    Level 1 Processing
+        Four main tasks
+            Transform data into a set of units and coordinates
+            ...
+    Level 2 Processing
+        collect info
+    Level 3
+        Difficult because it computes impossible engagement scenarios
+    Level 4
+        Meta process about all other processes
+        uses all the info to make a more reliable 
+        Four Key Funtions
+            Monitor data fusion process
+            ...
+    Data Management System
+        manipulation of data
+        Hard to deal with large and varied data, rapid retrieval
+
+    Areas of Imporvement
+        Should attress multi-image fusion problem
+        Accounting for complex sensors
+        Not really help in developing an architecture for a real system
+
+Architectures for Multisensor Data Fusion
+    2 situations for Level 1 fusion:
+        Fusion of locational info
+            Fusion of the raw observation data (data level or report level fusion)
+                data is alingned
+            fusion of state vectors (optimum estimate using data from an individual sensor
+            Hybrid fusion
+        Fusion of parametric data to determine the identity of the object
+
 
 
 
