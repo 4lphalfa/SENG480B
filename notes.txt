@@ -3209,6 +3209,275 @@ Architectures for Multisensor Data Fusion
             Hybrid fusion
         Fusion of parametric data to determine the identity of the object
 
+Hybrid Fusion
+    Combines the first two methods
+    Autonomous fusion because its faster
+    Raw data fusion for more accuracy
+    Will switch between the two when needed
+    More overhead is reqired
+
+Architectures for Multisensor Data Fusion
+    Identity fusion
+    Typo here somewhere
+
+Data Level Fusion
+    Each sensor will observe a sensor and combine and perform an identity declaration from the feature extraction
+
+Feature Level fusion
+    Takes multiple and concats into a single feature extraction
+
+Decision level fusion
+    
+Knowledge-based methods for data fusion
+    used to interpret fusion result
+    3 different elements for the Knowledge Based System
+        One or more knowledge reporesentation schemens
+        An automated inference/evaluation process
+        Control Schemes
+
+Accessment of the State of the Art
+    Level 1 challenges and limitations
+        Densoe target environment
+        Complex signal propagation
+        Background clutter
+    Level 2 and 3 processing:
+        Dominated by knowledge based methods
+        Establish a variable knowledge base of rules, frames, scripts to represent knowledge
+    Level 4 processing: accesses and improves the performances
+        Operation with single sensor has a high efficiency
+        Operation with multiple sensors/dynamic environment/mulitple targets are more challenging tasks
+        Limited resources provided for multiple sensors
+
+Summary
+    High standard algorithms, test and evaluation, creation of standard test cases, and systematic evolution of the technology are needed
+    Nonmilitary research in data fusion will produce innovations which will cross fertilize the whole are of data fusion technology
+
+
+
+
+==========
+2018-10-23
+==========
+
+An Intro to Multisensor Data Fusion - Alexandra Santos
+
+Background 
+    Published in 1997
+    References as far back as 1970
+    Overview of techniques and application of sensor functions
+
+What is multisensor data fusion
+    Combining data from multiple sensors to make better predictions
+    Based on the organic calculations we make every day
+    Increasing our complexity of calculations the further we get into the process
+    Commensurate: calculating the same thing
+
+Inference Hierarchy (Low to high)
+    Existence of an entity
+    Position and/or velocity
+    ...
+    Threat Analysis
+
+Military Applications
+    at the time, sensing tech to prove targets exist
+    inferences about an enemy situation
+
+Non-Military applications
+    academic, commercial, and industrial community
+    The theory is the same, but the observable data is slightly different. Much more variable
+
+JDL Process Model
+    meant to be generic as possible
+    describes how it works in a larger system
+
+JDL Process Model components
+    Sources...
+    ...
+
+Architecture models for fusion
+    Locational Data: Where the target is
+    Parametric Data: What the target is
+
+Level 1 procession for locational info
+    Three Basic Architectures
+        Centralized fusion <- Only works for commensurate data
+        Autonomous Fusion
+        Hybrid Fusion
+
+Centralized Fusion
+    Preprocessing happens before data alingment and association
+
+Autonomous Fusion
+    Started classifying our target before doing any fusion
+
+Hybrid
+    Two ways to go
+    Control scheme on where to fuse
+
+Level 1 processing for parametric info
+    "Identity Fusion
+        Data Level Fusion
+            Error in paper (switched)
+            Declare identy at the end
+        Feature Level Fusion
+            Extract features when we looked already at defining
+        Decision Level Fusion
+            we've done all are extracting of info, when we make decisions is when the fusion occurs
+
+Knowledge Based Methods
+    Reasoning techiques drawn from AI
+    Try to replicate how humans operate
+    At the end, hopefully we have a decision that a human would have made
+    Blackboard KBS 
+        break up into smaller problems
+
+KBS has 3 main elemnets
+    Knowledge Prepresentation schemes
+        How we represent our data to process it
+        Must have data up front
+    Automated inference/evaluation process
+    Control Scheme
+        What applies the rules from our evaluation process to our data
+
+Perspective on state-of-the-art fusion
+    At the time, there was AI
+    Level 1 is one of the most developed aspects of multisensor data fusion
+    Level 2 and 3 are more difficult because there were only primitive models of how our brains process that info
+    Look forward to smart, self calibrating sensors
+    Look forward to more research
+
+Summary
+    ANy CPS that has multiple sensors will need to apply one of these methods
+    The JDL process model was created to make a vocabulary
+    The Architecture will depend on the data and inference needed
+    Hardware can limit 
+
+
+
+
+Multisensor data fusion: A review of the state-of-the-art - Jackie Gorman
+
+Intro
+    Multisensor data fusion
+    Widely used
+    Investigating the data fusion task
+    Present a categorization of fusion algorithms
+
+What is Multisensor Data Fusion
+    Definition Summary
+        The study of efficiently combining data into a representationo that provides effective support for decision making
+    Advantages
+        Data authenticity
+        Availability
+    Ex. Wireless sensor dentowrks
+    Impact
+        Energy Restrictions
+
+Problems
+    Data Modality: homogeninous vs hetergenious
+    Processing framework: centralized or decentralized
+    Operational timing: out of sequence arrival of data
+    Static vs Dynamic phenomena: data chagning with time, data freshness
+No single algorithm can address al these challenges
+
+Data Related Challenge
+    Imperfection
+    COrrelaton
+    Inconsistency
+    Disparateness
+
+Why this Taxonomy
+    Ease of development
+    Categorization for data fusion algorithms
+    More intuitive
+
+Fusion of Imperfect Data
+    Most fundamental challenge, recieved the most research
+    Probabilistic Fusion
+        Uncerian data
+        Baysian fusion
+    Evidential Belief Reasoning
+        Uncertian and ambiguous data
+        Dempster Shafer theory
+    Fusion and Fuzzy reasoning
+        Vague data
+        Use Case: linguistic data from human experts
+    Possiblistic fusion
+        Imcomplete Data
+        Based of fusion and fuzzy 
+    Rough Set based fusion
+        Cranularity in data
+        Ignores uncertianty at differnt granularity levels
+    Hybrid fusion apporaches
+        Fuzzy set theory with D-S evidence theory
+        FUzzy set theory with Rough Set theory (FRST)
+    Random set theoric Fusion
+        Potential unifying framework
+        possible address all imperfect data
+
+Fusion of Imperfect Data Summary
+
+Fusion of Correlated Data
+    Rumor propagation issues aka data incest aka double counting problem
+    Leads to biassed estimation
+    Techniques
+        Eliminating data correlation
+            Explicitly
+            Implicityl
+                reconstruction of measurements
+        Fusion with unknown correlations 
+            Covariance Intersection (CI)
+                Computationally demanding
+                degredation of fusion process
+            Largest Ellipsoid (LE)
+                Formulates an estimate of your covariance matrix... matrix as ...
+
+Fusion of inconsistent data
+    Spurious Data
+    Out of sequence data
+        variable propagation times
+        OOSM appears as inconsistent data
+            discarding would cause inaccuracy
+            storing and reporcessing requires more resources
+        OOST is sent track info insted of raw data (like in OOSM)
+    Conflicting data
+        Heavily studied in Dempster-Shafer
+        Applied corrective strategies
+
+Fusion of Disparate Data
+    Input data
+    Fusion of hard and soft data
+    Human sentered data fusion
+        Humans as soft sensors, hybrid computers and hoc teams (hive mind)
+        Relies on emerging tech
+
+Discussion: Fusion paradigms
+    Soft/hard data fusion
+    Opportunistic fusion
+        sensors are shared resources
+        on the fly sensor discovery, ad hoc computation load, dynamic fusion rules
+    Adaptive fusion learning
+        paramaters are not know a priori
+        Tracking of mocing targes
+        machine learning techniques
+
+Discussion: Ongoing data fusion research
+    Automated fusion 
+        Formal theory
+    Belief Reliability
+    Secure Fusion
+        Data integrity, confidentiality, freshoness
+        Blind information fusion framework (BIFF)
+        Random offset Method (ROM)
+    Fusion evaluation
+        Performance
+            Quality fo input data
+            Efficiency of fusion algorithm
+        Simulation vs pratical applications
+
+Summary
+    Introduce data centric taxonomy
+    Explored challenge aspects
 
 
 
