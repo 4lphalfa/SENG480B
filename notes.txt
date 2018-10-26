@@ -3482,3 +3482,231 @@ Summary
 
 
 
+==========
+2018-10-26
+==========
+
+Data-Driven Modeling, Control and Tools for Cyber-Physical Energy Systems - Graham Grayson
+
+Intro
+    What is Demand Response (DR)
+        Volitility of the electrical grid
+        For commercial
+        Being paid to reduce energy consumption during a period of time
+    Volitility in the power grid is the new normal
+    Virtual Generator in the grid
+        Doesn't generate power itself but frees up energy
+
+Challenges of DR systems
+    Establishing a baseline
+        Modeling complexity
+    Limitations of current strategies
+        Rule based strategies - one size fits all
+        Simple, but doesn't account for outside conditions
+    Complexity and Scaleability
+        Hard to account for all the variables
+        Becomes much more complex as they get bigger
+    Usability of the new solutions
+        Only as got as their interpredictability
+
+Data Driven Solution
+    The best of both worlds
+        Simplicity of rules based, with predictive power of a modeled system
+    DR Advisor: uses historical data to build predictive regression trees
+        Outputs 3 capabilities
+
+Regression Trees?
+    Decision trees: binary, at each branch a yes/no 
+        Regression trees: subset of decision where the target ...
+    A set of data is used to train a predictive model
+    A recursive partitioning algorithm (CART)
+    highly interpretiable compared to other models
+
+Regression tree Example
+    You have a set of data, only know x-y coord, predict the color of the dots
+
+Data Description
+    Weather
+    Schedule
+        Day of week, time of day
+    Building
+        water temp, AC, light levels
+
+Problem Definitions - DR Baseline Prediction
+    Baseline: an estimate of the electricity that would have been by the customer in absence of a DR event
+    Accurate measurement and verification are critical ...
+
+Dolution to DR Baseline Prediction 
+    Used a mix of regression trees, boosted regression trees (BRT) and random forests (RF)
+        BRT and RF reduce overfitting
+
+DR Strategy Evaluation
+    Most ED relies on preset strategies, HOw to pick the best one
+    Best can be a combo of strategies
+
+Solution to DR Strategy Evaluation
+    Similar to DR baseline estimation
+    Auto regressive trees are used because of the length of a DR event
+    Account for the recomputation
+
+DR Control Synthesis
+    Harder to syntiesize a brand new strategy
+
+Solutions for Control Synthesis
+    Primary contribution of the paper
+    Manipulative variables: anything that the building manager can manipulate.
+    Account for the recomputation
+
+DR Control Synthesis
+    Harder to syntiesize a brand new strategy
+
+Solutions for Control Synthesis
+    Primary contribution of the paper
+    Manipulative variables: anything that the building manager can manipulate.
+    Need to separate variables into manipulate/non-manipulated
+
+mbCRT Algorithm
+    Model based control with regression trees
+    Still partition the data space into region using CART, but now the top part of the tree is learned using only non-manipulated variabiles
+    ...
+    Input: only non-manipulated variables
+
+    Trained one tree for power consumption
+        also trained trees for temperature zones in the building
+    
+    Split into non-manipulative and manipulative
+    build trees
+    do other stuff
+    plug it into the optimization equation
+
+Case Study
+    8 building on U of Penn
+    For each of the building, trained multiple trees on weather and power consumption
+    Predy accurate (92.8 and 98.9)
+    Placed 2nd Great Energy Predictor Shootout Challenge
+
+    Testing mbCRT, tested virtually on a standard test bed using EnergyPlus software
+    Trained on Chicago data
+    Tested using an actual DR event
+    3 manipulated variables
+    Generated tree had 369 leaves, each having a linear regression model
+    19 aditional trees to account for thermal comfort
+
+Conclusion
+    mbCRT outperforms the best rule based strategy by 17%
+    Biggest hurdle, modeling the baseline prediction
+        the solution helps overcomes this
+
+
+
+Optimal False Data Injection Attack Against Automatic Generation Control in Power Grids - Ngoc Thinh Nguyen
+
+Intro
+    Power Grid
+        Interconnect network for delivering electricity
+            Generation station
+            Transmission lines
+            Distribution lines: connect to individual customers, low voltage
+        Taintain operations by various closed-loop control systems
+        ...
+
+Powergrid overview
+
+Defn
+    Automatic Generation Control ACG
+        Why is it needed
+            Frequent adjectments are necessary because of the imbalance between generation and consumption
+        Drawbacks
+            Frequency under AGC is a safety-critical global parameter
+            AGC is a higly automated system
+    False Data Injection FDI
+        Inject fake measurement data to the system
+        Avoid detection of bad data
+        Mislead the controllers
+    Optimal Attack
+        Set of FDI on a sensor measurements for AGC mislead the grid frequency to exceed certain safety-critical tresholds within the shortest time
+        Understanding the optimal attack helps to protect the AGC
+
+How to formulate the optimal attack against the AGC
+    The Tie-line
+        The power is export from area == total power transmitted....
+        ....
+     Area Control Error ACE
+        update every AGC cycle and is sent to generator to determine their setpoints
+
+Overview COntrol Center
+    State Estimation SE
+        measure by tie-line can be noisy and faulty, byt Se can reduce measurement noise and detect faulty data
+
+
+
+
+
+Optimal False Data Injection Attack Against Automatic Generation Control in Power Grids - Yaxi Yu
+
+background Info
+    Powergrids
+        Maintain operation by various closed loop control systems
+    AGC (Automatic Generation control system)
+        used in all power grids to maintain the grid frequency in a nominal value
+    ACE (Area Control Error)
+        The ACE is updated every AGC cycle that is typically two to four seconds, and sent to generations to determine their setpoints
+    SE (State Estimation)
+        Can reduce environment noise
+
+Overview of AGC
+
+FDI Attack Modeel and Attacker's Objective
+
+False Data Injection attack by conpromising 
+    Physical sensors
+    Sensor data communication links
+    Data Processing programs
+
+FDI Attack Modeling with two assumptions
+    Attack's Stealthiness
+        There exist constant vectors amin and amax where amin <= 0 <= amax, such that for any FDI attack vector a, the compromised measure ment vector can pass all the data quality checks if
+            a -
+    Attacker's access to sensor measurements
+        We assum that the attacker has read access to the power flow measurements in x. The attacker has write access to a subset of the elements in z. Denote by W the set of indicies of z elements writeable by the attacker and a[j] the jth element of an attack vector a. Thus the attack vector a is subject to 
+            a[j] = 0, for all j does not exist in W
+
+Attacker Objective
+    Attack Sequence
+        if the current AGC cycle index is k and the attacker launches a series of FDI attacks from the (k+1)th to the (k+h)th AGC cycle with attack vectors ak+1,...,ak+h, the sequence {ak+1,...,ak+h} is called an attack sequence
+    Time-to-emergency
+        Given a safety region () where , TTE is the time from the onset of an attack sequence to the first ...
+
+How to formulate the optimal attack against the AGC? 
+Optimal Attack Sequence
+
+Laplace-Domain attack impact model
+
+Regression-Based Attack Impact Model
+    A linear regression model based on a key observation from the Laplace model
+
+Optimal FDI Attack Sequence Algorithm
+
+Achieving Optimal Attakc
+
+It the optimal attack achievalble by attacker
+    A model in either of the previous equation is a prerecqusite for...
+
+    A model in either of the previous equation sis a prerequisite for computing the optimal attack sequence using the alrogrithm listed above. However such detailed models that ...
+
+Active Probling
+    The attacker injects a series of attack vectors for small magnitudes that satisfy the constraints in:
+        Attack's stealthiness equation
+        Attacker's access to sensor measurements in z
+    and cause grid requency fluctuations similar to those caused by nautral demand fluctuations, so that these small "probes"...
+
+Passive Monitoring
+    (Had nothing written)
+
+Conclusion
+    
+
+
+
+
+
