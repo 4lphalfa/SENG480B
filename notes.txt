@@ -3634,10 +3634,79 @@ How to formulate the optimal attack against the AGC
      Area Control Error ACE
         update every AGC cycle and is sent to generator to determine their setpoints
 
-Overview COntrol Center
+Overview Control Center
     State Estimation SE
         measure by tie-line can be noisy and faulty, byt Se can reduce measurement noise and detect faulty data
 
+How to formulate the optimal attack against the AGC
+    How can attackers attack on the power flow sensor measurement vector z?
+    The attacker can
+        Compromise the physical sensrs
+        Attack on sensor data communication links
+        Attack on data processing programs at the control center
+        Attack on the third...
+
+    A) Attack Model:
+        Consists of two assumptions
+            Attacks stealthiness
+                Requirement: Need to bypass the BDD
+                    Attacker's access to sensor deasurements in z
+                        Assume that attackers has 
+                            Read access to the ...
+            Attacker's Objective
+                Pecause of equation 1 and 2, attackers cannot cause unsafe grid frequency ...
+
+    How to measure the effectiveness of a certain attack sequence
+        Time-to-emergence (TTE)
+            Assume given an safety region
+        TTE Ex
+            The attacker launches an attack sequence from the 36th AGC cycle and the frequency goes ...
+
+    Optimal attack sequence -> minimize the TTE
+        Laplace Domain attack impact model
+            The equation is key for attacker learn attack impact models stealthy and achieve the optimal attack
+            However to find fastest attack sequence model -> comvert Laplace domain base on equation to equivalent time domain model, but the process involve extremely complex diff equ
+        Regression based attack impact model
+            Propose a linear regression model
+        ...
+
+    Optimal FDI Attack Sequence
+    
+Achieving Optimal Attack
+    Active probing
+        Injects a series of attack vector of small magnitudes that satisfy the stealthiness and write access constraints to cause the grid frequency fluctration similar to those caused by natural demand fluctuations -> no damage occurs
+        Meanwhile...
+    Passive Monotoring
+        Abstract feedback system with scalar input x and output y, unknown scalar gains B1 and B2, and malicious injection a on the measurement of y
+        If the attacker have additional prior information about B1 and B2 -> they ...
+
+Discussions
+    Attack detection and mitigation
+        Dificul to tell between real FDI attackf from natural disturbances based on untrusted data
+        Developed a detection algorithm to check consistency between observed frequency deviation and predicted frequency deviation. 
+    Renewable Energy sources and large scale grids
+
+Simulations
+    To validate analysis
+    Using PowerWorld simulations based on three-area 37-bes model
+
+    Effectiveness of optimal attack sequence
+        The random and surge attack cannot breach the safety region withng the min TTE because AGC is able to correct the frequency deviation cause by these restriced attacks
+        The optimal attack can breach ...
+
+    Impact of whire access constraint with SE
+        MAE - mean absolute error
+        ...
+
+    Minimum write access requirement without SE
+        Evaluate the min number of tie-line sensors that attacker need to compromised in order to trigger remedial ...
+
+Conclusion
+    We talked about 
+        FDI attacks on sensor data for AGC
+        Key Attack impact models
+        Attacker can learn the models based on eavesdropped sensor data...
+        ...
 
 
 
@@ -3705,6 +3774,216 @@ Passive Monitoring
 
 Conclusion
     
+
+
+
+
+
+==========
+2018-10-30
+==========
+
+Optimal False Data Injection Attack Against Autonomatic Generation Control In Power Grids - Xiaotian Qi
+
+Background Knowledge
+    What is AGC
+        System to adjust power output of multiple generators
+    What is FDI attack
+        inject malicious measurements, tamper with sensor data
+    What is the effect of 
+        The data is tempered and the AGC will see the wrong data causing serious consequences
+
+Related work
+    FDI atacks follow limited predefined templates and constraint setting
+        More strategic and adapt tactics
+    Qualitative reachability anaysis is about FID's impacts
+        Quantitative vulnerability metric
+    The Grid's generation cost impact
+        Physical impact
+    THreat Assessment of CPS
+
+What    
+    How to formulate the optimal attack
+    How to achieve the optimal attack
+
+Basic Knowledge
+    AGC maintains power export scheduel
+        Area Control Error (ACE) signals
+        ACE cycles
+    State Estimation (SE)
+        Reduce noise
+
+Overview of AGC
+    x: the power flow measurements
+    Delta w_i: deviation of the grid frequency for the ith area
+
+Attack Model
+    How to attack data?
+        Where to mount the attack?
+            physical sensors
+            data links
+        Which type data
+    How to keep stealthy
+        it need to bypass the BBD
+        The grid operatior might apply more checks to vector z
+    What is attacker's write access
+    What is the attacker's Objective
+        Time-to-emergency
+
+Optimal Attack Sequence
+    Laplace-domain attack impact model
+        We can treat the AGC system as an open system
+        Can predict the change of w, the average deviations of all areas
+    Regression-based attack impact model
+        What is TTE
+            Time Domain
+            What is Laplace-domain
+            Complex frequencey Domain?
+        Knowledge about Laplace-Domain
+            laplace-transform
+            Time to Complex frequency
+            Integral transform
+        Go back to the previous equation
+            Proposal: linear regression model to solve
+    Optimal FDI attack Sequence
+        Need to solve time domain model
+
+Achieve Optimal Attakc
+    Question: Such detailed models not readily available, How to get them
+        Active Probing
+            Small magnitude attacks to learn the model
+        Passive Monotoring
+            without actuall tampering with them
+            more stealthy
+
+Active Probing
+    Adopt attack vectors (a): small magnitudes
+    Accumulate enough data: track of p w
+
+Passive Monotoring
+    Proposition: if the attacker knows some parameters, they can apply system identification techniques to learn the impact nodel in Eq3
+    Some Identification
+        Definition
+        MATLAB
+            Used to estimate parameters
+    Problem: How to obtain these parameters?
+        Assumtion: 
+        Own frequency sensors:
+        Public knowledge:
+        Steal:
+    1. Generate enough data
+    2. Train regression model (Eq4)
+
+Experimates
+    Simulations (active probing)
+        Effectiveness of optimal attack sequence:
+        Impact of whire access constraint with SE
+        Min write access requirement without SE
+    Test beds (passive monotoring)
+        Power controlled by a knob
+        A single-area AGC algorithm
+        AGC based on frequency measurements only
+        Process:
+            Manually tune the load to simulate load fluctuations
+            Mimic eavesdropping by using wireshark to extract delta w delta p
+            Learn the attack model using system identification tools
+
+Conclusion
+    Formulate the Optimal Attack
+        Laplace-Domain model
+        Time-domain model (linear regression)
+        Algorithmic formulation to compute
+    Achieve optimal attack
+        Eavesdropp...
+        ...
+
+
+
+Safety Assured Collaborative Loade Management in Smar Grids - Anna Olkhovskaia
+
+Intro
+    What is a smart grid
+        Works together with the powergrid to detect outages
+    What happens when the power grid gets overloaded
+        Load shedding
+
+Proposition
+    2 phase load management scheme
+        Give customers a chance to collaborative manage
+        Go back to the old method
+
+Picture showing both parts of a cycle
+    Safety assessment
+        calculate the time to being unsafe
+    Load management
+        time to being unsafe is used to calculate time left
+            High: no action
+            low: load curtailment (Concerned with this one)
+            urgent: load shedding 
+
+Approach Overview
+    Current use a centralized approache with is just load shedding
+    New approach would run parallel to existing solutions
+
+ELM
+    uses historical data for training
+Curtailment:
+    user collaboratively reduce their power supply
+Downfalls
+    Customer involvement
+Next step (if it fails)
+    Normal load shedding occurs
+Benefits
+    Runs side by side with existing tech
+    New programs can be incrementially implemented
+
+Time to being unsafe
+    Important Metrics
+        L: Loading demand
+        T: Time to being unsafe
+        ...
+
+T is the min time to being unstable
+P max additional power that each bus can draw without being unsafe
+
+Extreme Learning Machine (ELM)
+
+ELM is fed historic records of L from an operators database to train the ELM and generate a large amoutn of the <l,p> data pairs
+    In practice the elm continually improves as more current load parameters become available 
+    the measurements are collected using trusted ...
+...
+
+Practical Issues
+    If their is a planned change, it must be retrained
+    Multiple contingencies, fixed by suing multiple ELMs
+
+Two Phase Load Management
+    Cycles
+        Safety Assessment
+        Load Management
+    ...
+        ...
+
+Customers can control the highs and lows
+System has 3 thresholds
+    Tw: Warning
+    Tr: Restorative
+    Te: Emergent
+
+Figure
+    k=0 grid is safe
+    k=1 T drops below warning and system enter curtailment phase to compensate
+    k=3 T drops even lower, grid eneters emergent condition, begins load shedding
+    k=7 re...
+    ...
+
+Curtailment Model
+    
+Load Shedding
+
+Things to Consider
+    Te and Tr must guarantee that T will not reach o
+    Effectiveness depends on customer commitment levels
 
 
 
