@@ -3985,6 +3985,180 @@ Things to Consider
     Te and Tr must guarantee that T will not reach o
     Effectiveness depends on customer commitment levels
 
+ELM: calculates time to being unsafe
+
+Simulation Results
+    Based on 37 bus system
+    ELM vs baseline data driven approach
+    Both improve with training data
+    ElM is more accurate
+    Baseline speed suffers when data is increased
+
+Importance of Customer Commitments
+    Low causes prediction errors to rise
+    Schedule recisions
+        decrease with commitment
+
+Conclusion
+    Propose 2 phase load managment scheme
+        Switching is controlled by TTBU
+        Relies heavily on customer participation
+
+
+
+
+
+==========
+2018-11-02
+==========
+
+Multi-Timescale Electricty Theft Detection and Localization in Distribution Systems Based on State Estimations and PMU Measurements - Samual Allegretto-Smith
+
+Background
+    Non-Technical Loss (NTL) (Technical is loss through heat, transmission)
+    Associated with cultivation of drugs
+    Electrical fires, electrocutions
+    How to detect them?
+
+Two Solutions
+    Install more measurement units
+        costly, not scalable
+    Distribution System State Estimation (DSSE)
+        state is the coltage at each node
+
+Paper Topic
+    2 DSSE theft detection models
+    Proposed method of MISTE
+    Performance of MISTE vs the other 2
+
+System Model
+    Topology: Know the technical loss throughout the line so not to mistake it with non-technical
+    Voltage Measurements: Not every bus have a PMU
+    Energy Measurements
+    Timescale and Measurements: time between taken measurements
+        Smart Meter time slots are much bigger than the PMU time slots
+        Theft is detected when little reactice power is consumed..
+
+Active power: money spent on food
+Reactive power: money spent to get to the food store
+
+Snapshot-based state modes
+    
+State of the Art
+    Typical bad data detection (SoA-1)
+        Perform hypothesis test (stats)
+            No theft
+            presence of theft
+            if J(y) is ...
+        One outlier can be spread over all of the busses
+    Refined WLS (SoA-2)
+        b is a matrix that reduces to get more accurate results
+
+Proposed method - MISTE
+    Multi-Timescale theft estimation
+        Considers all PMU measurements over a time interval
+        More complex to compute
+        N is number of PMU measurements within a smart meter time slot
+        Vector a is bias vector to minimize the affect of the outliers
+
+Improvements
+    Theft detection and false detection is improved
+    Theft localization is improved with better accuracy
+
+Validation and Results
+    Simulated system, but real data
+    Illegal load is a constant active power sink
+    PMU measurements pulled, but illegal is simulated
+    Comparisond to benchmark
+        MISTE significantly outperforms the two SoA approaches
+    Theft Localization
+        is crucial
+        not perfect, but helps reduce search space
+    Voltage Measurement Insights
+        PMUs are mustly placed near the leafs of a distribution systems
+        Illegal load located near the substation are hard to detect
+    Addidng 2 more PMU adds a lot more cost
+
+Conclusion
+    Proposed methods improves significantly
+
+
+
+
+
+Multi-Timescale Electricty Theft Detection and Localization in Distribution Systems Based on State Estimations and PMU Measurements - Jake Poirier
+
+Terms
+    Electricity Theft
+        Illegal tapping of the secondary network
+        Cultivation of illigal drugs
+        95% of electricty theft in the Neatherlands is from drug cultivation
+    Phason Measurement Unit (PMU)
+        Measure voltage and direction, and quantity
+        Place at certain busses due to expence
+
+Contrabution
+    New method, multi-timescale theft estimation
+        Better theft detection rate compared to 2 ohter methods
+        Decrease false alarms
+    Insights on theft detection
+    ...
+
+System Overview
+    Buses are connected to multiple houses
+    Each house has a smart meter
+    Topology
+        set of buses I and set of branches b
+    Voltage Measurements
+        Taken from PMU's subset S of I
+        Voltage measurement, and voltage angle (direction), timescale of the PMUs 10s
+    Energy Measurements
+        From smart meters
+        Taken every 10min per hour
+    Timescales
+    State vectors
+
+SoA Methods
+    SoA-1
+        Detects Bad data
+        Snapshot based
+        weighted least square(WSL) objective function
+        Chi-square hypothesis testing
+    SoA-2
+        Shortfal of SoA-1 is error resulting from a measurement outlier tends to be spread ofer all the busses
+        To address this limitation a slight mod was mane do the objective function
+
+MISTE Method
+    Similar to the 2 SoA
+    It will account for every PMU measurement taken in the time scale
+    Combo of the 2 previous methods
+    looking for the lambda value
+    Subject to values is what makes this different from the other two methods
+
+Test System
+    33 buses, 8 PMUs
+
+Comparison of MISTE to SoAs Methods
+    MISTE is much better than the SoA methods
+
+Theft Location and Localization
+    Location
+    Localization
+
+Conclusion
+    MISTE improved Performance over SoA
+    Theft is hard to detect
+    PMU placement can be optimized
+        2 more PMUs helps for theft location
+
+Future Research
+    Study of multiple thefts
+        MISTE can be generalized
+        Performance evaluation becomes complex
+    Influence of distributed generation on theft detection
+        If you have multiple substations generating
+        Doesn't talk about if you misrepresent the power you give to the system
+
 
 
 
