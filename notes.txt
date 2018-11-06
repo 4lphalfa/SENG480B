@@ -4163,3 +4163,206 @@ Future Research
 
 
 
+==========
+2018-11-06
+==========
+
+Adversarial Attacks to Distributed Voltage COntrol in Power Distribution Networks with DERs - Matti Laine Farrell
+
+Golssary
+    Distributed Energy Resource (DER)
+        Community generated
+        Not centralized
+    Power Distribution Network
+        electrical network that provides energy
+
+    Two Types of Electrical Power
+        Real Power: P
+            Does work (Watts)
+        Reactive Power: Q
+
+Electrical Engineering 101
+    voltage and current, out of phase
+    Apparent power to supply real power
+
+Introduction
+    
+Related Work
+    Capacitor Banks and on-load tap-changing, wear out easily when voltage constantly varies
+    The attack is similar to DoS and False Data Injection
+        Directly manipulates the physical...
+
+Power Distribution Network
+    Tree-like structure
+    Linearized DistFlow Network
+        
+    Turn the 3 equations into matrix form
+    first row in matrix is all 0s
+    rest of the matrix is the rest of the network
+    if you were to have real power injection and reactive power injection together, it must equal 1
+    Split this up into generate and consume
+
+Assumptions
+    Every bus has only one DER device
+    Voltage at the substation = 1
+    Interested in controlling q^g
+    p^c, q^c, and p^g are determined by external inputs...
+
+Volt/VAR control
+    step sizes are important to making the matrix bounded
+    Note, If we have unlimited unbounted power, we can always stabailze the system
+
+Adversary Model
+    Similar to previous models
+    Attacker's DER devices are bounded physically on the amount of reactive power they can inject
+        otherwise no limit to damage caused
+    Able to compromize the smart meters
+
+Objectives
+    Find some sequence of reactive power injection that will lead to the largest amount of damage on a specific...
+    ...
+
+Can the attacker create an unbounded value?
+    No
+        Equations are linear
+
+Topology-Agnostic
+    Attacker knows nothing about the layout of the Power distributed Network, but the strategy presented is very simple and yields close to optimal results
+    constatnly applying the damage over time
+
+Optimal
+    Adversary knows full network topology
+    beta is bounded because the system id BIBO stable
+    Results show that when D step size is small, Beta is slightly larger than 2
+
+Last Assumtions
+    Attacker always uses topology-agnostic strategy since is so close to optimal
+    For testing and reslutsl, benign busses now have bounded input for ractive power...
+    ...
+
+Limiting the attack
+    Delta V will be set to 10% later
+    divide delta bu number of attacker busses and remove the sum
+
+Attack on Bus 13 in a Line Topology
+    WE can see we have 3 bars for each bus
+    optimal strategy is only slightly better than topology
+    
+IEEE 34-node test feeder
+    aim to protect 890 and 844 (highest real-power nodes)
+    
+Verify Assumptions
+    First Figure
+        Limited benignn buses will still be able to limit attackers
+    Second Figure
+        equilibrium equation is accurate
+
+Summary 
+    DERs are capable of causing voltage distruptions to a Power Distribution System equal to the range of the REactive Power that the DER is capable of injecting...
+
+Coneerns, Future Work, Questions?
+    Optimal attack strategy when the reactive pwoer inject of legitimate DERs is bounded is not considered
+    No additional monitoring of the system is considered (how to advoid detection?)
+    Network is radial network, but this is not common in real life
+        IRL we are supplied by multiple points, this wasn't considered in the paper
+
+
+
+
+A Distribud Anytime Algoriht for Real-time... - Lucas Parker
+
+Problem
+    We want a lot of EVs
+    We can't have a lot of EVs
+    Chargers get power from the same source as the house it is connected to
+    Charging cars are putting a strain on the infastructure we have in place
+    Allowing free reign on charging would overload the network
+
+Solutions
+    Long Term 1: upgrate power distribution infastructure
+    Long Term 2: Use something other than the power distribution network (eg solar panels)
+    Short Term: Ration existing infrastructure amongst EV chargers
+        There exists current solution
+
+An Example Network
+    Grid goes through intermediate devices that have a max capacity limiting how much power can go through them at one time
+    These protection devices are capable of computing and communicationg - something we can use in our solution
+    The path from the substation to the EV charger is called the EV path
+
+An Optimization Problem
+    Network utility maximizaiton problem
+    We can see that without any constraints, the power would be unlimited, but there is an upper bound
+    charger can't send power back into the network
+    The intermediate devices can't be overloaded
+    both the state of the art and proposed method solves it with an iterative method
+        this set of equations only have one optimal solution
+
+State of the art method: Incentive-based control
+    Each protection device has a price and is adjusted every iteration
+        price is based on congestion
+    The protection device sends their newly computed prices to their children, and pass on the prices they recieve from parents
+    EV charger computes the sum of the prices of the protection devices that are on the path from it to the substation, and sets its charging rate accordingly
+        If the aggrate price is high, it will decrease its charging rate, 
+
+Limitations of the SOAM
+    Lacks scalability
+        in the alg, there are two paramaters, you'd have to set is so everything can be done before the next tic, step size is the nudge factor
+        It is proven that as the size of the network increases, the step size for the optimal solution decreases
+        Shown experimentally that the algorithm takes longer to converge, but along the way it can get to a point to where the prices are set is such a way that a particular intermediate device will be given more power than it should alow, shutting it down as starving any children it has
+        When they detect that a protection device will be trigerred, it will shut down all charging until it can fix the problem
+            We'd rather not have this solution, it has many problems
+
+Proposed Method: Budget based control
+    Each EV charger gets a budget, it will set its charging rate to its budget
+    Based on the budget, it will compute a marginal benefit, greater if small, lower if bigger, encourages EV chargers with little power to get more
+    Substations recieve the marginal benefits and computes new budges accordingly
+    Substation sends prelininary budgets to protection devices at the start of paths to the EV chargers
+    Makes sure that the budget isn't set so that it can cause itself to become overloaded
+        if this happens, it will look at the EV chargers on its path and reduces it's budget until new budget arives (this info is chained down the network)
+
+Theoretical comparison
+    Budget based scales better, doesn't have to worry about becoming unstabel as step size grows
+    More reliable, never overloads the network, always has a solution ready
+    Greater communication overhead, both algs require communication betweed devices, but the butget also requires communication between the EV chargers and substation
+        This increase the time needed for a global clock click, because it takes longer for the communication to happen
+
+Experiments
+    Evaluated statically and dynamically
+        Static: Fixed load on protection devices doesn't change
+        Dynamic: Fixed load on protection devices changes, optimal solution is changing
+    Everything else is equal (same network topology, location of EV chargers, etc)
+    c is changing in the bottom equation
+    we use log because for optimization, it makes it easier to do math with, and it prevents starving out of any particular charger
+
+Static Testing
+    Scenario A: Small Fixed Load
+    Scenario B: Big Fixed Load
+    Both cases the budget based algorigthm converges much faster than the incentive based
+    Incentive based temporary causes overloading, which isn't good
+
+Dynamic Testing
+    Scenario A: Low fixed -> High Fixed -> low fixed (every 5 seconds)
+    Scenario B: Real household consumption data
+    Takeaway: incentive based frequently overloads, budget based never overloads
+    It does appear budget based is better, but this is for one particular paramater setting so perhaps for a different paramaters would have different results
+
+Conclusion
+    Budget-based converges faster, it wasn't proved mathmatically
+    Budget-based scales better, proved mathimatically
+    Never overloads the system
+    But has greater communication overhead
+    We can't conclude which is better, could depend on the network
+
+Future Work
+    Testing scalability, we know it will overload the network
+    Relaxing assumptions, like all of the devices are synchronized and reliable and get their work done before the global clock tic
+        Assumed there was a constant number of EV chargers on the network
+    Redusing messaging complexity, the one spot where it loses to the incentive-based
+
+Why don't we wait for a final answer?
+    In the dynamic setting, the network is changing at such a speed, that we will never be able to reach a final solution
+
+
+
+
+
