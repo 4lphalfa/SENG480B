@@ -4366,3 +4366,236 @@ Why don't we wait for a final answer?
 
 
 
+==========
+2018-11-09
+==========
+
+A Distributed Anytime Algorithm for Real time EV Charging Congestion Control - Scott Goerzen
+
+Glossary
+    NUM Problem: Instantaneous Network Utility Maximization Problem
+
+Problem
+    Lots of EVs
+    Continuing to increase
+    Average electric use is 2kW per house 
+    EV chaging uses 22kW per house
+    Grid can't handle this load
+
+Background 
+    Distributed network
+        Consists of devices that have a max loading rate (electricity can't go higher without overloading the device)
+    There are protection devices, saves from damage but power still goes out
+
+Solution
+    A. Upgrade grid
+        High cost
+        time consuming
+        slows down adoption of EVs
+    B. Use information and communication technologies to control EV charging
+        Dificult to predict (usage patterns)
+        Highly dynamic system (people charging at different time)
+        Lots of EVs and unknown spatial distribution
+    Distributed control system for EV charging
+        provides a quick response
+
+Distributed Control System
+    Goal: Solve NUM problem
+        Dual decomposition and...
+        real time, need to react in milliseconds to stop overloading
+        Time Critical problem
+
+NUM Problem
+
+Incentive Based Control (SotA)
+    take the problem, solve the constraint values to get the solution of the NUM problem
+
+Budget Based Control
+    Changing the NUM problem
+    Minimizing to X plus the budget
+    Tries to ensure that nobody is starved out of the system
+    Master Problem
+
+    Substation
+        creates a vector of the new benefits for new budgets from EVs
+        Create budget from this updated data
+        send budgent to children
+    Each Protection device
+        Updated budgets from parent
+        Add budgets for all lines and check against max capacity
+        Sends budgents to children
+    Each EV Charger
+        Update charging rate from min of budget and max rate
+        Charge battery at specified rate
+        If rate not max udate marginal benefit
+        ...
+
+Grid Communication
+
+Evaluation
+    A (lower)
+        Static
+            Budget reaches the black line and stays there
+            Incentives goes above (but no power) and then corrects
+    B (higher)
+        Static
+            Budget reaches the black line and stays there
+            Incentives goes above (but no power) and then corrects
+        Dynamic
+            budget does not go above the maximal loading
+            incentive does which causes loss of power
+
+Conclusion
+    Anytime algorithm
+    Distributed Method
+    Evaluated method
+    Evaluated against previous incentive method
+    Communication complexity
+    System Scalability
+
+Incentive
+    each iteration might not work, but less communication overhead
+Budget
+    always has an available solution, but has more overhead
+
+
+
+
+OpenUAV: A UAV Testbed for CPS and Robotics Community - Brandon Sopkow
+
+Terminology
+    CaaS: Containers as a Service
+        Enables for these simulations in the cloud without importing all of the software
+
+Software used in OpenUAV
+    Docker
+        CaaS used to run simulations in the cloud
+    ROS (Robotics operating System) / Mavros
+        What the drones are running on
+    PX4
+        UAV autopilot
+    Gazebo / Gzweb
+        Ability to simulate the test environment
+    CSP-VO
+        Cyber-Physical Systems Virtual Organization, web based interfacing
+    Ansible
+        Scripting and automation
+    Tensorflow
+        Opensources maching learning used in training simulations
+
+Related Work
+    Gzweb
+        Cloud environment for Gazebo
+    Robot Web Tools
+        robotics visualization and interaction software
+    The Construct
+        Development and learning environment
+
+Reasons for Development
+    Current lack of accessibility
+        Unix Proficiency required for other options
+        Needs powerful hardware
+            Cost
+    Innovation
+        High entry point limits access
+
+Design Requirements
+    Aimed to desing OpenUAV with:
+        Cloud Accessability
+        System independent testbed
+        Front end UI that communicates back end simulation
+        Real world use, not just simulation
+
+Architectural Implementation
+    User interacts with the interface
+    Interface calles to the back end
+    Server supplies...
+
+    OpenUAV server component
+        Simulation cored
+            Main components
+                Gazebo - virtual environment
+                    Gzweb - visualization and interaction swith environment
+                ROS - message passing 
+                    MAVROS / PX4 - flight essentials 
+                        SITL  - software in the loop (real world transferable)
+
+        Simulation containment
+            Main components
+                Docker
+                    CaaS enabling isolated simulations
+                Ansible
+                    Automated scripting service
+                        Simulation creation, teardown, and user interactions
+
+        Front End Interface
+            Main component
+                CPS-VO
+                    User authentication (SSL encryption)
+                    Interfacng of simulations
+                    In development as of publish date
+
+        Communication Architecture and CPS-VO interface
+            Cloud-enabled communication between front end CPS-VO interface and OpenUAV testbed
+
+Methods and Results
+    Two case studies
+        UAV Machine Learning Challenge
+            ML based UAV navigation training/testing
+        MultiUAV swarm Formationos
+            Controlling multiple UAVs under a common goal
+
+UAV Machine Learning Challenge
+    used Google Tensorflow
+        solutions aren't clear cut and require generalization
+    Network Used
+        DeepQ
+            Markov decision process 
+                If you have a pillar in front of you, wait and go back to training to make an informed decision
+    Tested 3 scenarions
+        Homing (find target)
+        Visual Servion (home in on target visually)
+        Obstacle advoidance
+    Challenges
+        Resetting upon failure and success
+            Resetting the target for obsticle advoidance was hard
+            The flight essential software PX4 wasn't designed for simulation environments, causing the UAV position data to 'lag, overshooting the origin in obstacle aevoidance
+        Training times
+
+Swarm Formation
+    Modified PX4 to account for multiple drones
+    Test scenario
+        given arbitrary start configuration - form a V-formation
+    Procedure
+        Calculate a series of matlab matricies that consisted of waypoints during each step of forming the V
+            Wern't able to port onto their testing environment due to licensing
+        The ROS would publish these points to get the drones into formation optimally
+        OpenUAV acts as a final safety net, accounting for errors in the offline calcualtions
+    Results
+        Able to achieve V configuration given start configurations more complicated than previous approaches
+        Matlab is propiretary, so you have to feed in the data
+
+Conclusions
+    Caes Studies
+        OpenUAV allows users to simulate and train UAV's on difficult tasks
+            But there are limitations in time for training
+        OpenUAV was able to simulate the coordinations of multiple UAV into formations
+            Matlab proprietary
+            There is lag 
+    Summary
+        First Cloud based, open sourced simulation testbed for UAVs
+        Lowers the entrypoint into UAV research
+        ...
+
+    Future work
+        Making the front end interface
+        Use of the open source libraries allows them to implement more functionality
+        Speedup problem
+            account for error detections beyond what is immediately infront of them
+        Expand the testbed for a larger vareity of tasks
+
+
+
+
+
+
