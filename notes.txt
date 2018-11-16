@@ -4595,6 +4595,241 @@ Conclusions
         Expand the testbed for a larger vareity of tasks
 
 
+==========
+2018-11-16
+==========
+
+Simeng Wang - paper 26
+
+Intro
+    Increased demand on Unmanned Aerial Systems (UAS)
+    Threats are growing both in munber and sophistication
+    Attacker-resilient UAS platforms...
+
+Background
+    Modern UAS Computing platform:
+        enabling more intelegent platforms
+        Applications for general purpose systems can be ported to these platforms with minimal migration efforts
+        Opensource application
+    Simplex Architecture
+        software solution that enables safe use of high performance but unverifiable controller
+
+VirtualDrone framework
+    To achieve attack resiliency
+    Isolates a normal but untrustowrth execution environment from a trusted one that
+        Manages real I/O operations
+        Conti...
+        ...
+
+    High Level Framework
+        Normal Control Environment NCE
+            corresponds to the complex controller in the Simplex architecture
+            external networking
+            complex third party develeoped
+            More susceptibl to security threats
+        Secure control environment SCE
+            Runs a minimal set of software components that are required to control the UAS
+            Even when the normal environment is taken over by the attacker, the SCE can still take over the evironment to keep system working
+
+    Assumptions
+        Virtual machine monitor = trusted computing base
+        SEC does not use the external network
+        Inside the VM, adversary may breach any part of the software stack; have root access
+        Do not consider physical attacks
+
+    Virtual Sensing and Actuation
+        Key functions of the SCE: protect the sensors and actuators
+        Passive approach 
+            Runs an I/O proxy for each device in the SCE...
+
+    Security and safety monitoring
+        The monitor recieves the sensor data for analysis
+
+Implementation
+    
+Experiments
+    Case 1
+        attacks on safety
+            Scenario: attaker disables the flight controller while the vehicle is flying
+            Leads the system to an open-loop state causing a crash
+            Implimented a linux kernel that
+                finds the autopilet 
+                kill the process
+    Case 2
+        Hijacking
+            Scenario: attacker attacks drone
+    Case 3
+        Corrupting safety functions
+
+    Case 4: 
+        Side Channel
+            Actors can estimate the location of the ground control station
+    Case 5:
+        Virtual Machine Introspection:
+            Many rootkits modify critical kernel data structures to intercept...
+            ...
+
+Discussion
+    Sensor Attack:
+        The VirtualDrone cannot handle physical manipulators on the sensors such as GPS spoofing
+    Power Consumptino
+        Although the power is mainly based on battery, the power consumption overhead of running the VirtualDrone is negligible
+
+
+
+
+VirtualDrone: Virtual Sensing, Actuation, and Communication for Attack-Resilient UAS - Adeshina Alani
+
+Defn
+    NCE: Normal Control Environment
+    SEC:
+    GCE: Ground Control Station
+    IMU: Inertial ...
+    ...
+
+Motivation
+    UAS boomin tends ot boost industrial productivity and economy
+    UAS are bing experimented for various technological driven services 
+    It's a key component in flight intelligent and autonomous system
+
+Existiong Problem
+    Drones are complex, several sensors
+    Several vulnerabilities
+    Continuous growing of sophisticated threats
+    Successful attak on UAS can result to compromised safety leading to loss of life or umplesant environment
+
+Related Work: Cyber-atack in UVS
+    Maldrone virus: software virus that compromised based on ARM Linux system
+    Hijacking of DJI consumer drones
+    MAVLink message injection into radio link in order to modify radio firmware
+    Backdore on Boeing 787 via the Acted ProASIC chip
+
+Mitigating Techniques for Cyber-attack in UVS
+    Hardware Based: 
+        Lots of configuration needed
+    Software Based: Virtual Machine
+        Flexable
+
+Problem Mitigation General Strategy
+    Integration of UAS in the current airspace (strategies)
+    Necessity for an attack-resilient UAS platform to guarantee safety of modern UAS, human environment
+    VirtualDrone: a software framework to address the security...
+
+Software Framework Structure
+    Aim: achieve cyber attack-resilient control of UAS even when there is security violation
+
+Framework Techiques
+    Virtualized the sensors, ...
+    ...
+
+Techniques Summary
+    Compromised UAS control Mode -> trusted UAS control mode
+
+    Does UAS achieve this?
+    Whas it implemented?
+    can we ascertain that the framework is robust for attack prevention during security breach?
+
+Modern UAS Computing Platform
+
+UAS Components
+    OS: Linux variants
+    Lightweight embedded systems eg Rasberry Py, Snapdragon flight control board, Intel Aero board
+    Communication interface
+    Custom application program eg computer vision program
+
+Simplex Architecture
+    Continuous Monitoring and Safety
+        It guaranteed high assurance of control with continuous and robust sstem
+Complex Controller is the normal environment
+Guanentee continuous monitoring
+
+High level framework Description
+    NCE
+        prone to the threats
+    SCE
+        only have specific functions that can be activated
+        Monitor for threats
+
+Control Switching
+    Involves switching between SCE and SCE during normal operation and when the normal controller is being violated
+    
+High Level VirtualDrone Framework
+    Note: the NCE also runs in a sandbox VM
+
+Virtual Sensing, Actuation and Communication
+    NCE does not have direct access to the sensors and actuators
+    I/O ...
+    ...
+
+Sensors Detail in VirtualDrone Framework
+    Inertial Measurement Unit
+    Barometer
+    Compass
+    Analog to Digital converter
+    GPS
+
+Sensor Virtualization in VirtualDrone Framework
+    Access to the devices registers by the NCE
+    Tight synchronization between NCE and SCE during low-level I/O transactions
+    Emulation interface through I/O proxu aided compr...
+    ...
+
+Virtual Connumication in SCE
+    All sensors, actuators, and telemetry communication were virtualized
+    Hidden communication channel is created for SCE
+    Upon detection of Hijacking attempt, GCS commands the SEC to switch to host control in order to return to the initial safe state
+
+Security and Safetry Monotoring
+    SEC holds the true measurement of the sensors
+    Virtual Machine Module checks for kernel integrity frequently
+    Upon detection of any attack, the framework switch to SEC ...
+    ...
+
+Quadcoptor drone Prototype
+    running an open source Autopilot on an embedded computing board
+
+Implemmentation Description
+    each sensor has a driver in the proxy environment
+    Virtual machine can only affect the values in the proxy
+
+Experimental Scenarios Assumptions
+    No new detection/mitigation solutions were proposed
+    Attacker can know the hardware and software
+    ...
+
+Case 1 Attacks on Safety
+    Control switch to SEC upon detection of violation and closed the open loop
+
+Case 2 Hijacking
+    Hijacking is done by exploiting the MAVLink protocol by sending new flight ...
+    Worse case: send the drone back home
+
+Case 3 Corrupting Safety Functions
+    Fly beyond geofense
+
+Case 4 Side Channel
+    Recieve signal strength indicator (RSSI)
+    VirtualDrone hides RSSI detail from the NCE but not the SCE
+
+Case 5 Virtual Machine Introspection
+    LibVMI library can be used for virtual machine introspection
+    SEC module checks the integrity of the system ...
+
+Additional Discussion
+    Sensor Attack
+        VirtualDrone cannot handle false data
+    Power consumption
+        Negligible
+
+Future Challenges
+    Desireable to run fully-verified control software in the SEC instead of demonstration alone
+    Future plan to adopt and implement a high-assurance controller for the VirtualDrone Framework
+
+Virtualized sensors
+    Major component on the I/O proxies
+    Never to the actual sensors
+
+
 
 
 
