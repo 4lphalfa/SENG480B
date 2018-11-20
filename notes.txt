@@ -4834,3 +4834,310 @@ Virtualized sensors
 
 
 
+==========
+2018-11-20
+==========
+
+VirtualDrone: Virtual Sensing, Actualtion, and Communication for Attack-Resilient Unmanned Aerial Systems - Shaelynn Brown
+
+Background
+    UAS: Unmanned Aerial System
+        Hobby to military
+    Security is really important
+    As their capabilities grow, so does the security vulnerability
+
+Contributions
+    Design on the framework
+    Implementation of a prototype
+    Experiments to determine effectiveness
+
+Virtual Drone Framework
+    NCE
+        Runs on a vm to isolate the security breaches
+        Fully controls the UAS with advanced functionality
+        Anything that is deemed a security threat
+    SCE
+        Minimal set of functionality
+        Functionality critical to the UAS
+        Runs on the host macine
+        Security and safety module detects a security violation and switches to the SCE
+
+    Actuator: motors
+    
+Virtual Sensor and Actuator
+    NCE does not access these
+    I/O operations are emulated
+    Feeds raw sensor data to the NCE
+    This sensor feeding looks as if the data is sampled from invisible, inaccessible devices
+
+Virtual Comminication
+    Applications in the NCE need access to the network
+    Users communicate with the NCE using a port forwarding mechanism provided by the VMM
+    Some communication channels must be managed by the SCE such as the ground control and the remote controller
+        radio communication channel
+    Creates a hidden channel to the controller and the SCE
+
+Security and Safety Module
+    Safety Monitor: analyzes the actuation outputs from the NCE
+    Fake Report Detector: intercepts radio telemetry messages to and from the NCE and provides them to the monitoring module for analysis
+    Geofencing - ran in the SEC where we know it has the true measurement
+    VMI: can check the integrity of the kernel code
+
+Implimentation
+    Raspberry Pi 2
+    Linux
+    KVM
+    QEMU, an open source virtual machine monitor
+    Navio+ sensor board to provide various sensor data for flight control
+    ArduPilot, an autopilot suite as the flight control software
+
+Attacks on safety
+    Goal: degrade the availability of critical sensors or actuators
+    Try to find the autopilot and kill the process
+    Worse case: disable the flight control
+    SEC calculates the errors
+    If the ...
+
+Hijacking
+    send a new flight path
+    the drone cannot detect the hijacking attempt, but the ground control station can
+    Ground control can use the hidden channel to send new safe flight paths
+
+Corruptiong Safety FUnctions
+    disable the geofence during a flight and send it to a no fly zone
+    geofencing module in the SEC continuously...
+    ...
+
+Side Channel
+    attacker tries to estimate the location of ground control by observing the strength of the radio signal
+    The VirtualDrone eliminates by not providing the signal strength to the NCE
+
+Virtual Machine Introspection
+    During the initialization of the VM
+    ...
+
+Discussion
+    No GPS spoofing
+    Negligible difference in power consumption
+    The hidden channel provides a method for human input when the security and safety module fails
+
+Conclusion
+    The presented the VirtualDrone framework as a solution to increasing...
+    ...
+
+
+
+
+Optimal False Data Injection Attack Against Automatic Generation Control in Power Grids - Yaxi Yu (Second Try)
+
+Power Grids
+    Generating stations that produce electrical power
+    High voltage transmission lines that carry power from distant sources to demand centers
+    Distribution ...
+
+Why attack?
+    can cause service outage and infrastructural damage
+
+AGC
+    short term
+    Control system
+    Adjusts the outpout power of generators based on measurements collected from sensors distributed in the grid
+    If attack, a frequency deviation will propigate to the entire grid
+
+FDI
+    forge events that do not occur
+
+Three-area 37 bus power grid
+    usually, only a subset of generators are under AGC
+    The ACE is updated every AGC cycle and sent to the generators to determine their setpoints
+    State estimation can reduce measurement noise and faulty sensor data
+
+Overview of AGC
+    Physical power system
+    Communicaton Network
+    Control center
+
+False Data injection attack
+    compromises
+    
+    Hacking Physical sensors
+        tedious and hard to coordinate
+    Hacking sensor data communication links
+        targeting the sensor data links may pose a lower bar for the attacker
+    ...
+        ...
+
+FDI attack model with two assumptions
+    Attacker's stealthiness
+    Attacker's access to sensor measurements in z
+
+Attacker's Objective
+    the attacker may not be able to compromise in one shot, ...
+
+    Attack Sequence
+    Time-to-emergency
+    Attacker's goal is to gind an attack sequence that minimizes the TTE
+
+Laplace-Domain Attack Impact Model
+    In the presence of FDI attack, and AGC system can be seens as an open-looped system
+
+Regression-based Attack Impact Model
+    linear regression model based on a key observation from the Lapace model equation
+    Based on the additive property, we propose an attack model based on linear regression. 
+
+Optimal FDI attack sequence algorithm
+    While loop
+
+Achieveing Optimal Attack
+    Active Probing
+    Passive Monitoring
+
+Active Probing
+    Attacker injects a series of attack vectors of small magnitudes that satisfy the constraints in:
+
+Passive Monitoring
+    we can learn the coefficient uh in regression-based attack model equation but not vh
+    ...
+    The attacker can estimate the value of ... but cannot estimate the individual values and thus cannot derive the coefficient for the function
+    But if he has additional prior info about the values
+
+Conclusion
+    Two key impact models
+        Laplace-Domain Attack Impact Model
+        Regression-Based Attack Impact Model
+    One efficient algorithm to detect the attack and its onset time
+    ...
+
+How to inject false data?
+    In the paper
+
+
+
+
+
+
+An Intro to Multisensor Data Fusion - Alexandra Santos (Second try)
+
+Background
+    Published in 97
+    References papers as far back as 70s
+    Overview of techniques and applications of sensor fusion
+
+What is Multisensor Data Fusion
+    Combining data from multiple sensors to get more robust predictions
+    Two types of data
+        Commensurate: measuring the same data to get more comprehensive set of data
+        non-commensurate: tracking different information
+    Statistical estimation problem
+
+Defn
+    Alignment: precess data so they measure same time and spatial reference
+    Association: calculations of how close the measurements are to each other
+    Correlation: decision making process which allocates measurements to fixed/tracked locakton of an entity
+    Classification: some level of identity of an entity is established
+    Situation Assessment: distributions of entities are associated with environmental, doctrinal, and performance data
+    Threat Assessment: a multi perspective assessment of the entity is performed to estimate future behavious and effects of entity
+
+Inference Level (high to low)
+    Threat analysis
+    Situation assessment
+    Behaviour of an entity
+    ...
+
+Military Applications
+    Identifying location, characterization, and identification of dynamic entities
+    Used to monitor, assess, and acto on info
+    Make inferences about an enemy situation
+    Challenges: dense tracking environemts, previously unknown enemies, real-time decisions needed, security
+
+Non-Military Applications
+    Academic, commercial, industrial
+    Robotics, automated controls of manucaturing systems, smart building, medical applications
+    Same general principles as military
+    Challenges: security and privacy, lots of users, internet and interconnectedness of systems
+
+JDL Process Model
+    A response to the 'lack of unifying terminology' for data fusion
+    generic for different applications
+    Output will be as accurate while being efficient and an interpretation of what the entities are doing
+
+Top leve data fusion process model
+    Source Preprocessing
+        Remove unneeded data
+    Level One Object Refinement
+        Get a sense of the object
+    Level Two Situation Refinement
+        Make relationships between the entities
+    Level Three Threat Refinement
+        Estimate what will happen in the future
+        Develop a course of action
+    Level 4 Process Refinement
+        Metaprocess
+        Monitor performance of the data fusion
+        Identifies what is needed to improve the multisensor data fusion (what helpful info is missing)
+        Allocating the internal fusion to the mission goals (working optimally to achieve goals)
+    Data Management system
+        Can be used at many points
+        Read/write
+        Must be fast and efficient
+
+Architecture models for fusion
+    Where should we combine or fuse the data in the system
+    Two main situations for Level 1 fusion
+        Locational Data
+        Parametric Data
+
+Locational info
+    Centralized fusion
+        fusing as you sense the data
+        Most accurate, you have to do less estimation
+        Only performed in commensary data
+        Resource heavy - much larger datasets, Hard to communicate
+    Autonomous Fusion
+        Fuse when you have gotten some of the info
+        Before fusing it uses alingment, association, and correlation
+        Less resource heavy
+        Loose some of the data, estimates less accurate
+    Hybrid Fusion
+        Control unit decides whether to use centralized or autonomous fusion depeding on the data
+        Has overhead
+        Efficient
+
+Parametric info
+    Data level fusion
+        detect an entity and then the data is fused
+        Then extract feature values to get an identity
+        Must use commesurate data
+    Feature Level fusion
+        features are independently extracted
+        feature vectors are combined
+        joint announcement ..
+    Decision level fusion
+        Features are independetly extracted
+        Each sensor performes an identity...
+Moving where the fusion happens
+
+Knowledge Based Methods
+    The way we make inferences and interpret data
+    Blackboard KBS, breaking up problems into smaller sets
+
+KBS has three main elements
+    Knowledge representation schemes
+    Automated inference/evaluation process
+    Control schemes
+We emply KBSs at the level 2, 3, and 4 processing stages when we need to make inferences
+
+Perspective on state-of-the-art fusion
+    lvl 1 is the most developed because it had the most cognative models
+    Issues: compex datasets, lots of noise
+    Machine learning could calibrate themselves
+    If you use multisensor data fusion when you have one really accurate sensor, you could get less accurate data by combining bad sensors
+    lvl 2 and 3 are difficult because there were only primitive models
+
+Summary
+    Any CPS with multiple sensors will need to fuse data
+    Architectures are dependent on types of data in inference needed
+
+
+
+
