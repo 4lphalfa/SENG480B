@@ -5141,3 +5141,293 @@ Summary
 
 
 
+==========
+2018-11-23
+==========
+
+Intrusion Detection Systems and Multi-sensor Data Fusion - Luis Rivera
+
+Context and Motivation
+
+Intrusion Detections
+    Intrusion: malicious activities that interfere with normal system behaviour
+    EJM: Langley Cyber-attack using email bombs for overwhelming and ...
+    ...
+
+Intrusion Detection (ID) Systems
+    Complements to the critical systems to guarentee safety
+    Protect information structures, devices and nodes
+        In regards to CIA
+
+Techniques for Intrusion Detection
+    Known Pattern Temlates
+        detect known actions
+    Threatening Behaviour Templates
+    Traffic Analysis
+    Statistical Anomolies
+    ...
+
+Approaches for ID
+    Host-Based intrusion detection system (HIDS)
+        Runs on individual hosts
+        Each HIDS is in charge of detecting anomolies in a single host
+    Multi-Host Network-based Intrusion Detection System (NIDS)
+        Placed at strategic points in the network
+        Each NIDS is respobsible for detecting anomalies
+
+Detection Reliability
+    Don't want unidentified attacks
+    Don't want false alarms
+    Want to achieve an equilibrium point for reliable detections
+
+Intrusion and Attacks in ID systems
+    Reliably Detected
+    Verified
+    Assessed
+    Companies are investing in security assessment
+
+Data Fusion for Cyberspace Situational Awareness
+    Predict future attacks/intrusions
+
+Data Fusion in ID Systems
+
+Multi-sensor Data Fusion (Distributed Sensing)
+    Used to combine data from multiple sensors to make stronger inferences than single sensors
+    Military Applications
+        Battlefield survellience
+    Commercial Applications
+        ...
+
+Multi-sensor Data Fusion Ecosystem
+    Exists in a cyberspace
+    Process input to produce outcomes
+
+Multi-sensor Data FUsion Requirements
+    Statistics
+    AI
+    Operations Research
+    Digital Signal Processing
+    Pattern Recognition
+    Cognitive Psycology
+    Information Technology
+    Decision Theory
+
+    Sensor Considerations
+        Detection Performance
+            take into consideration: false alarm rate, 
+        Spatial/themoral resolution
+            distinguish between multiple cyber intrusions
+        Spatial Coverate
+            span of...
+        ...
+        Measurement accuracy
+        Measurement dimensionality
+        Hard vs soft reporting
+        Detection/tracking reporting
+
+    Objective: Situational Awareness
+        Inference model
+            Observe:
+            Orient: learn unknown characteristics of the data
+            Decision:
+            Act
+
+The ID Data-fusion model
+    1.  Data collection
+    2.  Data Refinement
+    3.  Object refinement: Data placed in context
+    4.  Situational Refinement: Situational knowledge and awareness
+
+Data Mining in ID Systems
+
+ID SYstems Data Mining
+    Offline process
+    Analyze historical data
+    Filtered, transformed into datasets
+
+Data Fusion vs Data Mining
+    Inference Method
+    Temporal Perspective
+
+The ID Data Mining Model
+    1.  Raw data collection and indexing
+    2.  Data cleaning: Checking whether data is correct
+    3.  Data fildering and transformation
+    4.  Data mining operations
+    5.  Predict future events
+    6.  Model tuning (Asjust model parameters to improve the predictions)
+
+Data Mining Operations
+    Clustering
+    Association
+    Statistical Analysis
+    Rule Abduction (IF-THEN-ELSE)
+    Link or tree abduction
+    Deviation analysis
+    Neural Abduction
+
+Challenges of Data Fusion for ID Systems
+    Data Refinement
+        comes from several soruces and different formats
+        Develop a structured metalanguage
+    Temporal calibration of numerous streams of raw data and Security of communication protocols
+    Identification and tracking of dynamic intrusion and Correlation of events
+    Application of mathematical techniques for multisensory data fusion
+        Gating
+        Association
+        Assignment
+    Application of mathematical methods for decion level identity fusion
+    Combining knowledge from several diciplines
+    Knowledge fusion
+
+Discussion and Conclusion
+
+ID Systems Research
+    number of research papers have been growing
+
+Conclusions
+    Data fusion process involves several diciplines
+    Data fusion is essential in ID and CPS systems
+    Data fusion and data model represent a significant opportunity to improve the performance of traditional ID systems
+
+
+
+
+
+Unsupervised Machine learning for... - Jiamin Fan (Paper 6)
+
+Background and Motivations
+    We can use multiple sensors together to get better performance
+    Modern Distributed CPS encounter a larger variety of physical faults and cyber anomolies
+    Most data-driven methods need examples and of nominal and all possible anomalous conditions
+
+Anomoly Detection in CPS
+    Anomoly Detection
+        Deviation from its nominal behaviour
+        Detection rely on time series data generated from sensors and other sources of info
+        early detection is necessary
+    Anomoly detection approaches should have
+        ...
+
+A Data-driven framework for system-wide anomaly detection
+    a spatiotemproal feature extraction scheme based on the concept of symbolic dynamics
+    A Restricted Bolzmann Machine RBM
+    ..
+
+Spatiotemporal pattern network
+    Symbolization of the time series data
+        phase space divided into four parts
+        generate a sequence of symbols by mapping from the phase space into the symbol space
+        mappin is called Symbolic Dynamics
+
+    Extract key textures from time-series data
+        Partition a finite region of the phase space into 8 small regions
+        Map the phase space into the symbol space
+        a spatial and temporal discretization of the system dynamics
+        ...
+
+    Probabilistic finite state automata (PFSA)
+    STPN represents temporal dynamics of each sensor and their relational dependencies as PFSA
+    Atomic patterns (AP)
+    relational patters (RP)
+
+    Compute the state probability vectors (symbol generation matrices)
+        A PFSA based STPN has 4 tuple: (State set, Alphabet set, symbol generation matrix(transition probability), degree of causality)
+        An illustration of STPN
+
+D-Markof Machine
+    The symbolization process is approx as a Markov Chain of order D, which is called the D-Markov chain
+    ...
+
+Short Subsequences
+    Only thing we need to do is compute the causality for each transition probability
+    Need a large number of data points
+    Propose a new measure based on the statistical inference strategy
+
+Computation of Metrix (Modeling phase)
+    if we toss a coin, p is the probability of heads. There are k times heads in n times experiment
+    How do we know the prob of heads 
+    Bayes Theorem:
+
+Computation of Metrix (? Phase)
+    Dirchlet distribution
+    QaSb the relationship between tow sequences?
+
+Computation of Metrix (inference phase)
+    Compute the metric for a given shor subsequence...
+    ....
+
+Summy of STPN
+    Partion a finite region of the phase space and map the phase space into the symbol space
+    Learn PAs and RPs from the multivariate train symbol sequence
+    Conside shor subsequences from the train sequence and evaluate for each subsequence
+    For one subsequence, assign state 0 or 1 for each AP and RP. The every subsequence leads to a binary vector L. One such binary vector is treated as on training example for the system wide RBM
+
+Restricted Boltzman Machine (RBM)
+    Concept of Energy Model
+        The lower the energy the more stable it is
+
+    The Function of energy model
+        If data fits into a certain distribution, we can use max likelihood to study it easlily
+        Its hard to training a set of data if we don't know the distribution of data
+        Statistical mechanics results show that any distribution can be converted into an energy model
+        Tow roles of energy model: objective function and objective solution
+
+    The Structure of RBM
+        Visual mode, hidden node
+
+    Coding Process
+        Use a sample as input 
+        calculate the condition probability for hidden node
+        pick hi= 0 or 1 randomly according to p(hi=1|v)
+    decoding process
+    Calculate condition probability for hidden nodei
+    pick v= 0or1 randomly according to p(vi=1|h)
+
+    The energy function for an RBM
+        The meaning of thes energy fucntion is a energy between any connected visual node and hidden node
+        Each joint configuration of these variables determines a particular state of the system and energy value E(v,h) is associated with it
+        Energy values are functions of the weights and bias terms
+        The probability of a state P(v,h) is ...
+
+    Weights and biases are obtained via maximizing likelihood of the training data
+        Fit the training data a much as possible
+        Fisual node
+        Hidden node
+        for each p(v),
+        Derive lnp(x) respect to W, B, and c respectively
+        Fre energy is obtained
+
+Kullback-Leibler Distance (KL)
+    Is used for distinguishing anomalies from nominal modes
+        A symmetric information measure of distance between distribution and P and distribution Q, the distance is defined as
+
+Anomaly detection in simluation data
+    Case 1: single nominal mode
+        Atomic and relational patterns of the nominal condition are used for training the RBM
+        Testing data corresponds to 6 patterns
+        Results:
+            Free energy distribution of the nominal patters matches qute closely with that of the training patterns
+            Other patters are quite different and move to the right
+            KDL metrics: 0.01, 6.82, 21.70, 7.63, ...
+    Case 2: Multiple nominal modes
+        KLD: 0.002, 0.068, 6.067, 1.467, 2420, 3.199, 0.906
+
+Summary
+    The proposed framework can capture multiple nominal behaviours within one model while slight change in causualty patterns ...
+
+Validation on a Real System-Integrated Building
+    Radiant Floor Heating System
+        Data collected for two different modes: winter mode and summer mode
+
+Conclusion
+    This work present a new data-driven framework for system-wide anomaly detectin to address a wide range of nominal operating modes and unforseen anomalous situations without labled training data in CPS
+    A free energy estimation of system wide patterns using RBM
+    Can capture multiple diverse nomimal modes within a single probabilistic graphical model
+    Detect anomalies successfully
+
+
+
+
+
+
