@@ -5431,3 +5431,328 @@ Conclusion
 
 
 
+==========
+2018-11-27
+==========
+
+Intro to CPS
+
+(Before) Embedded Systems
+    computing systems designed for a specific purpose
+
+Trend 1: Embedded Systems are getting more complex
+    Increasing number of sensors, actuators, smart control, GUI, ...
+    Intelligent data fusion
+
+    Ex, general automotive system
+        Number of ECUs have more than doubled in 10 years
+
+Trend 2: Embedded systems are getting more connected
+    Command-and-control network -- real-time integration...
+    Geotagging
+
+    Ex. v2v and v2x communication
+        With this, we can make the transportation more safe
+
+CPS -- The next evolution
+    Integration of computation with physical processes
+    Built on top of embedded computing systems
+    Interactions with the physical environment is promoted to a 'first class'
+    Promotes interaction and integration of subsystems
+        Classic safety-critical embedded system: black boxes
+        CPS: white-boxes-open protocols
+    Main goals:
+        ....
+
+CPS Applications
+    Several things only possible due to CPS
+        Integrated operating room
+        Smart grid
+        UAV
+        Autonomous vehicles
+
+System view of CPS
+    The core is the info/data
+
+Control View of CPS
+    Different perspectives of how we see CPS
+
+    Sense some environment data with sensor
+    Send to the controller
+    Controller makes decision
+    Sends decision to the actuator
+    Actuator will do real work (actual acceleration)
+    This is a loop
+
+CPS Requirements
+    1. Safety
+        At all times
+        Interacts with the environment
+        Failure can have fatal consequences
+        Correctness depends on both logical results and the time at which results are produced
+            Sensing need to break, and breaking at the correct time
+    2. Performance
+        Results constricted
+        Many systems are resource constricted
+    3. Interoperability
+        Individual subsystems connected by open protocols
+        Security can bu an issue
+
+Reliable CPS: Not so much!
+    Many examples showing this
+
+Safety
+    Hard to guarentee in interconnected and interdependent systems
+    1. Do not trust communication channels
+        Each subsystem must be independently safe
+    2. Do not trust the users
+        Users are error prone
+        Must protect against user mistakes
+    3. Do not trust lower-criticality subsystems
+        Protect life-critical subsystem
+
+Timing Predictability
+    Biggest architectural and system challenge
+    Lowest level: Deterministic, we know everything
+    Higher levels: Deterministic behaviours dissapears, lose all concept of timing
+    CPS uses real time
+    We need to ensure that computation always finished within a guarenteed time -- worried about worse case performance
+    Timing Predictability
+        Time the system requires to perform an operation should have little variation
+        Such time should be easy to compute
+        It should not be affected by other parallel operations in the system
+
+Security
+    Interconnected systesm are open to attacks
+    Integrity and abailability are often more important than confidentiality, but not always
+
+Research Topics
+
+Security
+
+CPS Security inceidents
+    Siberian pipeline: June 1982
+        Soviets stole control software from Canadian company
+        US influence Canadian company to alter code such that pipeline pressure would build up
+    Stuxnet: 2009
+        Used 4 undiscovered exploits
+    US Dron Captured: 2011
+        GPS Spoofing
+    IoT DDoS ...
+
+Typical CPS Architecture
+    Sensors, actuators, and computing parts
+    Computing parts can get data from sensors to control actuators
+
+CPS Attack Surfaces
+    Cyber
+        Communication, networks, computers, ....
+    Environmental
+        GPS signal, electromagnetic interference, ...
+    Physical
+        Locks, casings, cables, ...
+    Human
+        Phishing, blackmail, ...
+
+What is CPS Security
+    A CPS attack whose goal is to affect the interaction between a CPS and the physical world
+        Originated through any attack surface
+    CPS Security concerns the development of technologies for defending against CPS attacks
+        Discovering new vulnerabilities
+        Detecting CPS attacks
+        Mitigating attack effects
+
+Ex. Sensor Attack
+    Target: Sensor
+    The attacker can arbitrarily change sensor measurements
+        Environmental attack surfaces
+        Cyber attack surfaces
+    Goal: Resilience
+    To ensure control performance against attacks
+
+    Idealy The system performs (almost) the same as if there is no attack
+        ex crusie control under a speed sensor attack
+
+    How sensor attack affects control
+        1. A sensor attack or fault occurs
+        2. The input incorrectly reflects the system's stae
+        3. The output is misled
+        4. The actuator performs the misled actuation
+        5. The physical system drifts off
+    The key point is that the sensor data is incorrect, if we can fix that the system will go back to normal
+
+    Some existing approaches
+        Approaches rely on sensor redundancy
+            Multipe sensors (partially)  measure the same variables
+        CPS Checkpointing and recovery
+            Occasionally store estimated states
+            Recovery Current state using historical states
+
+Real-time Scheduling in CPS
+
+Why real-time scheduling
+    Computational tasks running in cyber components
+    We need tu ensure that these tasks always finish within time windows
+    Interested in worse case performance
+    It is challenging to make all tasks meet all deadlines
+
+Real-Time Systems
+    Correctness of the system depends not only on the logcal result of the computation but also on the time at which the results are produced
+    A correct value at the wrong time is a fault
+    ...
+
+Soft vs Hard Real-Time
+    Soft: missing is undesirable but is not catastrophic
+        concerend with average case
+    Hard: missing is catastrophic, not an option
+        concerned with worse case
+
+Task Model
+    Task: a real-time computation unit
+        Think of it as an execution thread with addition timing requirement
+    Three Main Task Models
+        Aperiodic
+        Periodic
+
+Aperiodic Tasks
+    Event triggered computation
+    Activated by an external event
+    Runs once to respond to the event
+    Relative Deadline D: available time to respond to the event
+Periodic Tasks
+    Time-triggered computation
+    activated periodically ever T time units
+    Each instance is called a job
+    Each job hase the same relative deadline (usually = to period)
+    ex most digital controllers
+
+Sporadic Tasks:
+    Same as periodic, but the tasks is activated at most every T time units (minimum interarrival time)
+    ex processing network packets
+
+Periodic Task -- Main Concepts
+    Execution time must be worse case
+    Relative deadline is previous instance plus period
+
+Periodic Task Model
+    Relative Deadline = 8
+    Actual deadline = Activation time + relative deadline = 10
+
+Utilization and Schedulability Analysis
+    Task Utilization for a periodic/sporadic taks
+        Percentage of processor time required by the taks
+    System Utilization
+        Percentage of processor time requreid by all tasks
+    Baase uniprocessor scheduling result: task set is clearly not schedulable
+    ...
+
+Other Detail on the Analysis
+    For a scheduling alg to be useful, it must be associated with a schedulability analysis
+    Sufficient analysis: if the analysis says YES, then the task set is schedulable by the given alg, if NO, we do not know
+    Necessary analysis: if the analysis says NO, the we know that there exists a valid scenario in which the taks set misses a deadline
+    Offline analysis: task set is decided before the system starts. ...
+    ...
+
+Ex: Uniprocessor Periodic Schedulihg
+    Three main categories
+        1. Table-Based scheduling
+            Do everything before
+            Build a table that dictates when each tasks executes
+            Only works for periodic tasks
+            Only works for off-line analysis
+            Sometimes the best choice for more complex task models
+        2. Fixed-priority Scheduling
+            Each task is assigned a fixed priority
+        3. Dynamic-priority scheduling
+            Priority varies at run time
+    Scheduler is typically preemptive -- better system utilization
+
+Rate-Monotonic Scheduling
+    Fixed-priority scheduling alg
+    Assume the deadline = the period
+    Assing priorityes to tasks on the basis of their periods: shorter is higher priority
+    Liu and Laylard schedulability analysis: task set is schedulable if : when is less than the bound...
+    Note that ..
+    What happens if ...
+        Notihng can be said according 
+
+RM Example
+    Worse case response time is produced when 
+    Case #1: 
+    Case #2:
+    Case #3:
+
+Earliest-Deadline First
+    Dynamic-priority scheduling algorithm
+    Task priority is inversely proportional to its current current absolute deadline
+        Earler deadline is higer priority
+        Each job has a differend teadline, hense different priority
+    Assumes periodic or sporadic tasks with 
+    Schedulability analysis: the taks set is schedulabile if: U <= Ub = 1
+        Since tasks sets ...
+
+EDF Example
+    Case #3: 
+
+Another Example
+    RM: not known, but not schedul
+
+Scheduling on Multiprocessor
+    Two solutions for scheduling real-time tasks on multiprocesors
+        1. Partitioning
+            Statically assign tasks among M processors
+            Ex: EDF each fore is schedulable if sum of utilizations of tasks assigned to that core <= 1
+            Problem can be rephrased as : given a set of objects with known sizes, place them into M equal-size containers
+            Classic bin-packing problem -- NP-hard
+        2. Global Scheduling
+            Keep a global scheduling queue
+            Whenever there is a free core, pick on task from the cueue and schedule it on the core
+            In practice, real-time adoption of multiprocessors is limited, especially for hard systems
+
+Global Scheduling
+
+
+Sensor Fusion in CPS
+
+Motivation
+    Each sensor has its strengths and weaknesses
+    Optimal decision making: multiple sensors
+
+Sensor Fusion - Defn
+    Collect from multiple sensors to improve accuracy and more specific inferences
+
+Ex Autonomous cars
+
+
+Energy and Power
+
+Introduction
+    Simply means a smarter power grid
+    More efficient and to way communication
+
+Comparison
+    
+Smart Home
+
+Integration of Renewable Energy
+    Heavily relies on wind/solar
+    These vary over time do to conditions
+
+Consumer Engagement
+    
+Grid Operation Centers
+
+Distribution Intelligence
+
+Plug in Electric Vehicles
+
+Smart Grid Components
+    Smart meters
+    Phasor measurements
+    Information tranfers
+    Distrbuted Generators
+
+
+
+
+
